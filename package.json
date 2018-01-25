@@ -16,6 +16,7 @@
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "server": "nodemon api/server/index",
+    "seed": "node api/script/seed.js",
     "deploy": "api/script/deploy"
   },
   "jest": {

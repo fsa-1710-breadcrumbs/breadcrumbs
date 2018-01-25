@@ -1,17 +1,3 @@
-// const express = require('express');
-// const app = express();
-// const path = require('path');
-
-// const PORT = process.env.PORT || 1337;
-
-// const server = app.listen(PORT, () => {
-//     console.log(`Listening on http://localhost:${server.address().port}`);
-// });
-
-// app.get('/', (req, res, next) => {
-//   res.sendFile(path.join(__dirname, 'index.html'));
-// });
-
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -19,6 +5,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const session = require('express-session');
 const passport = require('passport');
+
 const db = require('./db');
 
 const PORT = process.env.PORT || 1337;
@@ -28,7 +15,6 @@ module.exports = app;
 
 if (process.env.NODE_ENV !== 'production') require('../../Secrets');
 
-// passport registration
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) =>
   db.models.user.findById(id)
@@ -36,27 +22,23 @@ passport.deserializeUser((id, done) =>
     .catch(done));
 
 const createApp = () => {
-  // logging middleware
+
   app.use(morgan('dev'));
 
-  // body parsing middleware
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  // compression middleware
   app.use(compression());
 
-  // session middleware with passport
-  // app.use(session({
-  //   secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-  //   store: sessionStore,
-  //   resave: false,
-  //   saveUninitialized: false,
-  // }));
+  app.use(session({
+    secret: process.env.SESSION_SECRET || 'matcha',
+    resave: true,
+    saveUninitialized: true,
+  }));
+
   app.use(passport.initialize());
   app.use(passport.session());
 
-  // auth and api routes
   app.use('/auth', require('./auth'));
   app.use('/api', require('./api'));
 
@@ -79,7 +61,10 @@ const createApp = () => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
   });
 
-  // error handling endware
+  // app.get('/', (req, res, next) => {
+  //   res.sendFile(path.join(__dirname, 'index.html'));
+  // });
+
   app.use((err, req, res, next) => {
     console.error(err);
     console.error(err.stack);
@@ -88,10 +73,9 @@ const createApp = () => {
 };
 
 const startListening = () => {
-  // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+  const server = app.listen(PORT, () => console.log(`Listening on http://localhost:${server.address().port}`));
 
-  // set up our socket control center here if we use it.
+  // Future implementation:  set up our socket control center here if we use it.
 };
 
 const syncDb = () => db.sync();
