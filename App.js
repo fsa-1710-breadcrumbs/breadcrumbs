@@ -44,5 +44,13 @@ cube.rotation.y += 0.04;
 animate();
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
 
+  // const camera = ExpoTHREE.createARCamera(
+  //   arSession,
+  //   gl.drawingBufferWidth,
+  //   gl.drawingBufferHeight,
+  //   0.01,
+  //   1000
+  // )
+
   }
 }
