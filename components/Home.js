@@ -1,30 +1,3 @@
-// import React, { Component } from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: 'column',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: 'ghostwhite'
-//   }
-// });
-
-// export default class Home extends Component {
-//   constructor(props){
-//     super(props);
-//   }
-
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>Welcome to Breadcrumbs</Text>
-//       </View>
-//     );
-//   }
-// }
-
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
@@ -57,7 +30,6 @@ export default class Home extends React.Component {
     );
   }
 
-
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
   const arSession = await this._glView.startARSessionAsync();
@@ -67,6 +39,7 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
+<<<<<<< HEAD
 //next three lines are pure 3js
 // const geometry = new THREE.BoxGeometry(0.07, 0.07, 0.07);
 // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
@@ -85,6 +58,24 @@ sphere.position.z = -1.2;
     requestAnimationFrame(animate);
     // cube.rotation.x += 0.07;
     // cube.rotation.y += 0.04;
+=======
+  console.log('arSession', arSession)
+  console.log('CAMERA', camera)
+  console.log('RENDERER', renderer)
+
+  //next three lines are pure 3js
+
+  const geometry = new THREE.SphereGeometry(0.07, 0.07, 0.07);
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+  const sphere = new THREE.Mesh(geometry, material);
+  scene.add(sphere);
+  sphere.position.z= -1.2;
+
+  console.log('scene', scene.toJSON)
+
+  const animate = () => {
+    requestAnimationFrame(animate);
+>>>>>>> 60ee6f68c61f22d0c75b9f3c4422f6c07349d00b
     sphere.rotation.x += 0.01;
     sphere.rotation.y += 0.01;
     renderer.render(scene, camera);
@@ -92,10 +83,12 @@ sphere.position.z = -1.2;
     gl.endFrameEXP()
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 60ee6f68c61f22d0c75b9f3c4422f6c07349d00b
 animate();
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
-
   }
 }
