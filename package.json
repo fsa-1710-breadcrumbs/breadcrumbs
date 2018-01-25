@@ -9,13 +9,14 @@
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "concurrently 'npm run ios' 'npm run server'",
+    "start": "NODE_ENV='development' concurrently 'npm run ios' 'npm run server'",
     "react": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
-    "server": "nodemon server/app"
+    "server": "nodemon api/server/index",
+    "deploy": "api/script/deploy"
   },
   "jest": {
     "preset": "jest-expo"
@@ -25,6 +26,7 @@
     "body-parser": "^1.18.2",
     "cannon": "^0.6.2",
     "chai": "^4.1.2",
+    "compression": "^1.7.1",
     "concurrently": "^3.5.1",
     "crypto": "^1.0.1",
     "expo": "^25.0.0",
