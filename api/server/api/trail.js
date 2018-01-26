@@ -6,7 +6,21 @@ module.exports = router;
 router.get('/trails', (req, res, next) => {
   Trail.findAll()
   .then(foundTrails => {
-    res.json(foundTrails)
+    res.json(foundTrails);
   })
   .catch(next);
+});
+
+router.post('/trails', (req, res, next) => {
+  Trail.create({
+      where: {
+       breadcrumbs: req.body.coords,
+       description: req.body.timestamp,
+       userId: req.body.userId
+    }
+  })
+    .then(createdTrail => {
+      res.json(createdTrail);
+    })
+    .catch(next);
 });
