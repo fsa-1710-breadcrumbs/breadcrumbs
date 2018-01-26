@@ -25,7 +25,7 @@ export default class Home extends React.Component {
         ref={(ref)=> this._glView = ref}
         style={{ flex:1 }}
         //onContextCreate takes a callback which recieves a gl object
-        onContextCreate={this._onGLContextCreate}
+        onContextCreate={ this._onGLContextCreate }
         />
     );
   }
@@ -51,7 +51,7 @@ const geometry = new THREE.SphereGeometry(0.15, 20, 20);
 const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
-sphere.position.z = -1.2;
+sphere.position.z = -20;
 
   const animate = () => {
     requestAnimationFrame(animate);
