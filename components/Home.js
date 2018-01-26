@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 export default class Home extends React.Component {
   constructor() {
     super();
-    state = {
+    this.state = {
       location: null
     };
   }
@@ -44,7 +44,7 @@ export default class Home extends React.Component {
 _getGeoLocation = async () => {
   let { status } = await Permissions.askAsync(Permissions.LOCATION);
   if (status === 'granted') {
-    let location = await Location.getCurrentPositionAsync({});
+    let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
     this.setState( { location } );
     console.log("this is my geo location: ", this.state.location)
   }
