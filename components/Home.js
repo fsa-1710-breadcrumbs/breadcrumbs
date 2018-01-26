@@ -21,12 +21,36 @@ export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      location: null
-    };
+      // location: null
+        location: {
+           "coords": {
+             "accuracy": 65,
+             "altitude": 8.645169258117676,
+             "altitudeAccuracy": 12.72334098815918,
+             "heading": -1,
+             "latitude": 40.70467336127081,
+             "longitude": -74.00862513042138,
+             "speed": -1,
+           },
+           "timestamp": 1516994126569.8108,
+         }
+    }
   }
 
   componentWillMount() {
     this._getGeoLocation();
+    // this.state.location = {
+    //            "coords": {
+    //              "accuracy": 65,
+    //              "altitude": 8.645169258117676,
+    //              "altitudeAccuracy": 12.72334098815918,
+    //              "heading": -1,
+    //              "latitude": 40.70467336127081,
+    //              "longitude": -74.00862513042138,
+    //              "speed": -1,
+    //            },
+    //            "timestamp": 1516994126569.8108,
+    //          }
   }
 
   render() {
@@ -53,44 +77,28 @@ _getGeoLocation = async () => {
 
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
-  // console.log("this is running inside onGLCONTEXTCREATE: ", gl)
   const arSession = await this._glView.startARSessionAsync();
   const scene = new THREE.Scene();
   const camera = ExpoTHREE.createARCamera(
     arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
-  // console.log("this is running: ", Expo.Location.getCurrentPositionAsync())
-  // console.log("this is running inside:")
 
-//next three lines are pure 3js
-// const geometry = new THREE.BoxGeometry(0.07, 0.07, 0.07);
-// const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-// const cube = new THREE.Mesh(geometry, material);
-// scene.add(cube);
-// cube.position.z= -0.4;
-
-// wire framed sphere code
-const geometry = new THREE.SphereGeometry(0.15, 20, 20);
-const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
-const sphere = new THREE.Mesh(geometry, material);
-scene.add(sphere);
-sphere.position.z = -1.0;
+  const geometry = new THREE.SphereGeometry(0.15, 20, 20);
+  const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
+  const sphere = new THREE.Mesh(geometry, material);
+  scene.add(sphere);
+  sphere.position.z = 0;
 
   const animate = () => {
     requestAnimationFrame(animate);
-    // cube.rotation.x += 0.07;
-    // cube.rotation.y += 0.04;
     sphere.rotation.x += 0.01;
     sphere.rotation.y += 0.01;
     renderer.render(scene, camera);
-    //same from 2js excpet expo requires the end of the frame explicitly
     gl.endFrameEXP()
   }
 
-
-
-animate();
+  animate();
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
   }
 }
