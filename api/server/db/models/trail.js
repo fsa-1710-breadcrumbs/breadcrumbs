@@ -7,7 +7,7 @@ const Trail = db.define('trail', {
   },
   description: {
     type: Sequelize.TEXT,
-  },
+  }
 });
 
 module.exports = Trail;
