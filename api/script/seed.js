@@ -20,8 +20,36 @@ const users = [
   }
 ];
 
+const trails = [{
+  description: "firstBreadcrumb",
+  breadcrumbs :  [{
+    "accuracy": "65",
+    "altitude": "9.025277137756348",
+    "altitudeAccuracy": "10",
+    "heading": "-1",
+    "latitude": "40.705019108357114",
+    "longitude": "-74.00913176281047",
+    "speed": "-1"
+  }],
+  userId: 1
+}];
+
+// const seed = () =>
+//   Promise.all(users.map(user => User.create(user))
+//   )
+//   .then(()=>
+//   Promise.all(trail.map(crumb => Trail.create(crumb)))
+//   )
+// );
+
 const seed = () =>
-  Promise.all(users.map(user => User.create(user))
+Promise.all(users.map(user =>
+  User.create(user))
+)
+.then(() =>
+Promise.all(trails.map(trail =>
+  Trail.create(trail))
+)
 );
 
 const main = () => {

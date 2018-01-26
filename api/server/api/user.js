@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const gatekeeperMiddleware = require('../../utils/gatekeeperMiddleware');
+const gatekeeperMiddleware = require('../../../utils/gatekeeperMiddleware');
 const { User, Trail } = require('../db/models');
 
 module.exports = router;
@@ -27,8 +27,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/',
-  // gatekeeperMiddleware.isLoggedIn,
-  // gatekeeperMiddleware.isAdmin,
+  gatekeeperMiddleware.isLoggedIn,
+  gatekeeperMiddleware.isAdmin,
   (req, res, next) => {
     User.create(req.body)
       .then(user => res.status(201).json(user))
@@ -40,8 +40,8 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.put('/:id',
-  // gatekeeperMiddleware.isLoggedIn,
-  // gatekeeperMiddleware.isAdminOrSelf,
+  gatekeeperMiddleware.isLoggedIn,
+  gatekeeperMiddleware.isAdminOrSelf,
   (req, res, next) => {
     req.requestedUser.update(req.body)
       .then(user => res.json(user))
@@ -49,8 +49,8 @@ router.put('/:id',
   });
 
 router.delete('/:id',
-  // gatekeeperMiddleware.isLoggedIn,
-  // gatekeeperMiddleware.isAdminOrSelf,
+  gatekeeperMiddleware.isLoggedIn,
+  gatekeeperMiddleware.isAdminOrSelf,
   (req, res, next) => {
     req.requestedUser.destroy()
       .then(() => res.sendStatus(204))
