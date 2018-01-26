@@ -3,7 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
 import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
-import Expo from 'expo';
+import Expo, {Location, Permissions, Platform} from 'expo';
 import { SphereGeometry } from 'three';
 console.disableYellowBox = true;
 
@@ -18,6 +18,17 @@ const styles = StyleSheet.create({
 });
 
 export default class Home extends React.Component {
+  constructor() {
+    super();
+    state = {
+      location: null
+    };
+  }
+
+  componentWillMount() {
+    this._getGeoLocation();
+  }
+
   render() {
     return (
       //full screen view via expo
@@ -30,14 +41,27 @@ export default class Home extends React.Component {
     );
   }
 
+_getGeoLocation = async () => {
+  let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  if (status === 'granted') {
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState( { location } );
+    console.log("this is my geo location: ", this.state.location)
+  }
+}
+
+
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
+  // console.log("this is running inside onGLCONTEXTCREATE: ", gl)
   const arSession = await this._glView.startARSessionAsync();
   const scene = new THREE.Scene();
   const camera = ExpoTHREE.createARCamera(
     arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+  // console.log("this is running: ", Expo.Location.getCurrentPositionAsync())
+  // console.log("this is running inside:")
 
 //next three lines are pure 3js
 // const geometry = new THREE.BoxGeometry(0.07, 0.07, 0.07);
@@ -51,7 +75,7 @@ const geometry = new THREE.SphereGeometry(0.15, 20, 20);
 const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
-sphere.position.z = -1.2;
+sphere.position.z = -1.0;
 
   const animate = () => {
     requestAnimationFrame(animate);
@@ -64,11 +88,8 @@ sphere.position.z = -1.2;
     gl.endFrameEXP()
   }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 60ee6f68c61f22d0c75b9f3c4422f6c07349d00b
 animate();
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
   }
