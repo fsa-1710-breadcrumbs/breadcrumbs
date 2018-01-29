@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+// import { isLoggedIn, addUser } from '../store';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -11,7 +13,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Home extends Component {
+export default class LoginForm extends Component {
   constructor(props){
     super(props);
   }
@@ -19,11 +21,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to Breadcrumbs</Text>
-        {/* <Button
-          onPress={() => this.props.navigation.navigate('LoginForm')}
-          title="Sign-Up / Login"
-        /> */}
+        <Text>LOGIN FORM</Text>
       </View>
     );
   }
