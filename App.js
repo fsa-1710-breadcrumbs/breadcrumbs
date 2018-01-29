@@ -1,7 +1,7 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import Home from './components/Home';
+import home from './components/home';
 
 const RootNavigator = StackNavigator({
     Main: {
