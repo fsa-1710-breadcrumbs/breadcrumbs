@@ -3,7 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
 import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
-import Expo from 'expo';
+import Expo, {Location, Permissions, Platform} from 'expo';
 import { SphereGeometry } from 'three';
 import maths from './maths'
 console.disableYellowBox = true;
@@ -19,6 +19,28 @@ const styles = StyleSheet.create({
 });
 
 export default class Home extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+     location: null,
+     errorMessage: null,
+  }
+}
+
+  componentWillMount() {
+      this._getGeoLocation();
+
+  }
+
+  _getGeoLocation = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status === 'granted') {
+      let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
+      this.setState( { location } );
+      console.log("this is my geo location: ", this.state.location)
+    }
+  }
+
   render() {
     return (
       //full screen view via expo
@@ -31,7 +53,6 @@ export default class Home extends React.Component {
     );
   }
 
-
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
   const arSession = await this._glView.startARSessionAsync();
@@ -41,10 +62,12 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-
-
-let lat = 40.70502730103653
-let long = -74.00893461209553;
+// let lat = 40.70502730103653
+// let long = -74.00893461209553;
+    let lat = this.state.location.coords.latitude
+      let long = this.state.location.coords.longitude
+      console.log('latitude', lat)
+      console.log('longitude', long)
 
 const maths = (lat,lon) => {
     let cosLat = Math.cos(lat * Math.PI / 180.0);
