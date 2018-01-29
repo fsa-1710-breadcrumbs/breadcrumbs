@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import Expo, {Location, Permissions, Platform} from 'expo';
 import { SphereGeometry } from 'three';
-import maths from './maths'
+// import {maths, sphereX, sphereY, sphereZ } from './maths'
 console.disableYellowBox = true;
 
 const styles = StyleSheet.create({
@@ -24,13 +24,25 @@ export default class Home extends React.Component {
     this.state = {
      location: null,
      errorMessage: null,
+     trails: []
   }
+  // this.createCrumbs = this.createCrumbs.bind(this);
 }
 
   componentWillMount() {
       this._getGeoLocation();
+      // let length = this.state.trails.length
+      // let trails = this.state.trails
+      // if (length > 1){
+      //   trails.forEach(crumb =>{
+      //   createCrumbs(crumb.coords.latitude, crumb.coords.longitude)
+      //   })
+      // }
 
   }
+
+
+
 
   _getGeoLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -39,6 +51,10 @@ export default class Home extends React.Component {
       this.setState( { location } );
       console.log("this is my geo location: ", this.state.location)
     }
+  }
+
+  componentDidMount(){
+
   }
 
   render() {
@@ -62,8 +78,6 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-// let lat = 40.70502730103653
-// let long = -74.00893461209553;
     let lat = this.state.location.coords.latitude
       let long = this.state.location.coords.longitude
       console.log('latitude', lat)
@@ -74,38 +88,46 @@ const maths = (lat,lon) => {
     let sinLat = Math.sin(lat * Math.PI / 180.0);
     let cosLon = Math.cos(lon * Math.PI / 180.0);
     let sinLon = Math.sin(lon * Math.PI / 180.0);
-    // let rad = 500.0;
     sphere.position.x =  cosLat * cosLon;
     sphere.position.y =  cosLat * sinLon;
-    sphere.position.z =  sinLat;
+    sphere.position.z =  -sinLat;
     }
 
-const geometry = new THREE.SphereGeometry(0.15, 20, 20);
-const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
-const sphere = new THREE.Mesh(geometry, material);
+let geometry = new THREE.SphereGeometry(0.15, 20, 20);
+let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
+let sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 maths(lat,long)
 sphere.position.x ;
 console.log('sphere.position.x', sphere.position.x)
 sphere.position.y ;
 console.log('sphere.position.y', sphere.position.y)
-sphere.position.z;
+sphere.position.z ;
 console.log('sphere.position.z', sphere.position.z)
 
+// createCrumbs(la,lo){
+// let geometry = new THREE.SphereGeometry(0.15, 20, 20);
+// let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
+// let sphere = new THREE.Mesh(geometry, material);
+// scene.add(sphere);
+// maths(la,lo)
+// sphere.position.x
+// console.log('sphere.position.x', sphere.position.x)
+// sphere.position.y
+// console.log('sphere.position.y', sphere.position.y)
+// sphere.position.z + 5
+// console.log('sphere.position.z', sphere.position.z)
+// }
 
 
   const animate = () => {
     requestAnimationFrame(animate);
-    // cube.rotation.x += 0.07;
-    // cube.rotation.y += 0.04;
     sphere.rotation.x += 0.01;
     sphere.rotation.y += 0.01;
     renderer.render(scene, camera);
     //same from 2js excpet expo requires the end of the frame explicitly
     gl.endFrameEXP()
   }
-
-
 
 animate();
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
