@@ -37,8 +37,8 @@ export default class Home extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this._getGeoLocation();
+  // componentWillMount() {
+  //   this._getGeoLocation();
     // this.state.location = {
     //            "coords": {
     //              "accuracy": 65,
@@ -51,7 +51,7 @@ export default class Home extends React.Component {
     //            },
     //            "timestamp": 1516994126569.8108,
     //          }
-  }
+  // }
 
   render() {
     return (
@@ -65,18 +65,19 @@ export default class Home extends React.Component {
     );
   }
 
-_getGeoLocation = async () => {
-  let { status } = await Permissions.askAsync(Permissions.LOCATION);
-  if (status === 'granted') {
-    let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
-    this.setState( { location } );
-    console.log("this is my geo location: ", this.state.location)
-  }
-}
+// _getGeoLocation = async () => {
+//   let { status } = await Permissions.askAsync(Permissions.LOCATION);
+//   if (status === 'granted') {
+//     let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
+//     this.setState( { location } );
+//     console.log("this is my geo location: ", this.state.location)
+//   }
+// }
 
 
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
+  // console.log("this is gl: ", gl)
   const arSession = await this._glView.startARSessionAsync();
   const scene = new THREE.Scene();
   const camera = ExpoTHREE.createARCamera(
@@ -88,12 +89,27 @@ _onGLContextCreate = async (gl) => {
   const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
   const sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
+
+  const newSphereGeometry = new THREE.SphereGeometry(0.15, 20, 20);
+  const newSphereMaterial = new THREE.MeshBasicMaterial({ color: 0x7fffd4, wireframe: true });
+  const newSphere = new THREE.Mesh(newSphereGeometry, newSphereMaterial);
+  scene.add(newSphere);
+  newSphere.position.z = -0.5;
+  // this.setTimeout(() => {
+  //   newSphere.position.z--;
+  // }, 3000);
+
   sphere.position.z = 0;
+  // console.log("this is scene: ", scene)
 
   const animate = () => {
     requestAnimationFrame(animate);
     sphere.rotation.x += 0.01;
     sphere.rotation.y += 0.01;
+
+    newSphere.rotation.x += 0.01
+    newSphere.rotation.y += 0.01
+
     renderer.render(scene, camera);
     gl.endFrameEXP()
   }
