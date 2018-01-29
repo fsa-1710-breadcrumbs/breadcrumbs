@@ -5,7 +5,7 @@ import home from './components/home';
 
 const RootNavigator = StackNavigator({
     Main: {
-        screen: Home,
+        screen: home,
         navigationOptions: {
           headerTitle: 'Breadcrumbs',
         }

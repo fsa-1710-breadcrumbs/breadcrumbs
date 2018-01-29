@@ -41,24 +41,28 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-  maths = (40.70502730103653,-74.00893461209553) => {
-    var cosLat = Math.cos(lat * Math.PI / 180.0);
-    var sinLat = Math.sin(lat * Math.PI / 180.0);
-    var cosLon = Math.cos(lon * Math.PI / 180.0);
-    var sinLon = Math.sin(lon * Math.PI / 180.0);
-    var rad = 500.0;
-    marker_mesh.position.x = rad * cosLat * cosLon;
-    marker_mesh.position.y = rad * cosLat * sinLon;
-    marker_mesh.position.z = rad * sinLat;
+let lat = 40.70502730103653
+let long = -74.00893461209553;
+
+const maths = (lat,lon) => {
+    let cosLat = Math.cos(lat * Math.PI / 180.0);
+    let sinLat = Math.sin(lat * Math.PI / 180.0);
+    let cosLon = Math.cos(lon * Math.PI / 180.0);
+    let sinLon = Math.sin(lon * Math.PI / 180.0);
+    let rad = 500.0;
+    sphere.position.x = rad * cosLat * cosLon;
+    sphere.position.y = rad * cosLat * sinLon;
+    sphere.position.z = rad * sinLat;
     }
 
 const geometry = new THREE.SphereGeometry(0.15, 20, 20);
 const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
-sphere.position.x = marker_mesh.position.x;
-sphere.position.y = marker_mesh.position.y;
-sphere.position.z = marker_mesh.position.z;
+maths(lat,long)
+sphere.position.x;
+sphere.position.y;
+sphere.position.z;
 
 
   const animate = () => {
