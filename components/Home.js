@@ -41,6 +41,8 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
+
+
 let lat = 40.70502730103653
 let long = -74.00893461209553;
 
@@ -49,10 +51,14 @@ const maths = (lat,lon) => {
     let sinLat = Math.sin(lat * Math.PI / 180.0);
     let cosLon = Math.cos(lon * Math.PI / 180.0);
     let sinLon = Math.sin(lon * Math.PI / 180.0);
-    let rad = 500.0;
-    sphere.position.x = rad * cosLat * cosLon;
-    sphere.position.y = rad * cosLat * sinLon;
-    sphere.position.z = rad * sinLat;
+    var rad = 6378137.0;
+    var f = 1.0 / 298.257224;
+    var C = 1.0 / Math.sqrt(cosLat * cosLat + (1 - f) * (1 - f) * sinLat * sinLat);
+    var S = (1.0 - f) * (1.0 - f) * C;
+    var h = 0.0;
+    sphere.position.x = (rad * C + h) * cosLat * cosLon;
+    sphere.position.y = (rad * C + h) * cosLat * sinLon;
+    sphere.position.z = (rad * S + h) * sinLat;
     }
 
 const geometry = new THREE.SphereGeometry(0.15, 20, 20);
@@ -61,8 +67,11 @@ const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 maths(lat,long)
 sphere.position.x;
+console.log('sphere.position.x', sphere.position.x)
 sphere.position.y;
+console.log('sphere.position.y', sphere.position.y)
 sphere.position.z;
+console.log('sphere.position.z', sphere.position.z)
 
 
   const animate = () => {
