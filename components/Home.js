@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import Expo from 'expo';
 import { SphereGeometry } from 'three';
+import maths from './maths'
 console.disableYellowBox = true;
 
 const styles = StyleSheet.create({
@@ -30,6 +31,7 @@ export default class Home extends React.Component {
     );
   }
 
+
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
   const arSession = await this._glView.startARSessionAsync();
@@ -39,21 +41,24 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-//next three lines are pure 3js
-// const geometry = new THREE.BoxGeometry(0.07, 0.07, 0.07);
-// const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-// const cube = new THREE.Mesh(geometry, material);
-// scene.add(cube);
-// cube.position.z= -0.4;
+  maths = (40.70502730103653,-74.00893461209553) => {
+    var cosLat = Math.cos(lat * Math.PI / 180.0);
+    var sinLat = Math.sin(lat * Math.PI / 180.0);
+    var cosLon = Math.cos(lon * Math.PI / 180.0);
+    var sinLon = Math.sin(lon * Math.PI / 180.0);
+    var rad = 500.0;
+    marker_mesh.position.x = rad * cosLat * cosLon;
+    marker_mesh.position.y = rad * cosLat * sinLon;
+    marker_mesh.position.z = rad * sinLat;
+    }
 
-// wire framed sphere code
 const geometry = new THREE.SphereGeometry(0.15, 20, 20);
 const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
-sphere.position.x = 0;
-sphere.position.y = -2;
-sphere.position.z = -2;
+sphere.position.x = marker_mesh.position.x;
+sphere.position.y = marker_mesh.position.y;
+sphere.position.z = marker_mesh.position.z;
 
 
   const animate = () => {
