@@ -28,7 +28,7 @@ export default class App extends React.Component {
       return null;
     }
 
-    const Layout = createRootNavigator(signedIn);
+    const Layout = createRootNavigator(true); // normally keep 'signedIn' but do true for development
     return (
       <Provider store={store}>
         <Layout />

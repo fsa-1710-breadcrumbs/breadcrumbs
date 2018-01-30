@@ -33,7 +33,7 @@ export default function reducer (currentUser = {}, action) {
 export const login = (credentials, navigation) => dispatch => {
   axios.put('http://localhost:1337/auth/login', credentials)
     .then(res => setUserAndRedirect(res.data, navigation, dispatch))
-    .catch(() => navigation.navigate('SignedOut', {error: 'Unsuccesful!'}));
+    .catch(() => navigation.navigate('SignedOut', {error: 'Unsuccessful!'}));
 };
 
 export const logout = navigation => dispatch => {
