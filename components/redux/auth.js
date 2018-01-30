@@ -31,7 +31,7 @@ export default function reducer (currentUser = {}, action) {
 /* ------------       THUNK CREATORS     ------------------ */
 
 export const login = (credentials, navigation) => dispatch => {
-  axios.put('http://localhost:1337/auth/login', credentials)
+  axios.put('http://localhost:1337/auth/login', credentials) // call a root url var, as a util or folder 'env'; ticks instead of quotes
     .then(res => setUserAndRedirect(res.data, navigation, dispatch))
     .catch(() => navigation.navigate('SignedOut', {error: 'Unsuccesful!'}));
 };

@@ -20,15 +20,24 @@ const users = [
 
 const trails = [{
   description: "11th Floor Python",
-  breadcrumbs :  [{
+  startCrumb :  {
     "accuracy": "65",
-    "altitude": "9.025277137756348",
+    "altitude": "9.025277137756348", //  no need for alt
     "altitudeAccuracy": "10",
     "heading": "-1",
     "latitude": "40.705019108357114",
     "longitude": "-74.00913176281047",
     "speed": "-1"
-  }],
+  },
+  endCrumb :  {
+    "accuracy": "65",
+    "altitude": "9.025277137756348", // no need for alt
+    "altitudeAccuracy": "10",
+    "heading": "-1",
+    "latitude": "40.705019108357117",
+    "longitude": "-74.00913176281049",
+    "speed": "-1"
+  },
   userId: 1
 }];
 

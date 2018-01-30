@@ -24,7 +24,7 @@ const User = db.define('user', {
   salt: {
     type: Sequelize.STRING
   },
-  googleId: {
+  googleId: { // no OAuth yet
     type: Sequelize.STRING
   },
   isAdmin: {
@@ -40,7 +40,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 const excludedFields = ['password'];
-User.prototype.sanitize = function () {
+User.prototype.sanitize = function () { // could exclude sanitize fx; could make a hook
   const obj = {};
   for (const key of Object.keys(this.toJSON())) {
     if (excludedFields.includes(key)) continue;

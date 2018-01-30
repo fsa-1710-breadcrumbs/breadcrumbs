@@ -56,6 +56,7 @@ class SignUp extends Component {
   }
 
   render() {
+    // console.log("????", this.props.navigation.navigate('SignIn'))
     return (
       <View style={{ paddingVertical: 20 }}>
         <Card>
@@ -94,6 +95,8 @@ class SignUp extends Component {
             textStyle={{ color: '#bcbec1' }}
             title="Sign In"
             onPress={() => this.props.navigation.navigate('SignIn')}
+            // are you getting the stack navigator or tab navigator?
+            // **perhaps** do logic in the thunks rather than pass to thunks?
           />
         </Card>
         <View style={styles.container}>
@@ -115,3 +118,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+// why ESLint hates styles at the bottom? Should be at the bottom.

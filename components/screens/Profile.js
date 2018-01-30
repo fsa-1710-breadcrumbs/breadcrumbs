@@ -49,3 +49,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+// stylesheet.create, less in-line style, can import stylesheet into a util style folder

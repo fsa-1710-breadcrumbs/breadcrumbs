@@ -57,7 +57,7 @@ export const SignedIn = TabNavigator(
   }
 );
 
-export const createRootNavigator = (signedIn = false) => {
+export const createRootNavigator = (signedIn = false) => { // only export the root navigator if it accesses the subnavigators
   return StackNavigator(
     {
       SignedIn: {

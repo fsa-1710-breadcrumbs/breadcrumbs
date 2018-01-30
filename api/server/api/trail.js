@@ -24,3 +24,7 @@ router.post('/', (req, res, next) => {
     })
     .catch(next);
 });
+
+
+// think about RESTful-ness here
+// more often updating trails (PUT) than creating them (Corey prefers putting more logic on the backend)

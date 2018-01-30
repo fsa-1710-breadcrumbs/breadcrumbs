@@ -23,7 +23,7 @@ export default function reducer (users = [], action) {
       return action.users;
 
     case CREATE:
-      return [...users, action.user];
+      return [...users, action.user]; // may not need array of users
 
     case REMOVE:
       return users.filter(user => user.id !== action.id);
@@ -41,7 +41,7 @@ export default function reducer (users = [], action) {
 /* ------------       THUNK CREATORS     ------------------ */
 
 export const fetchUsers = () => dispatch => {
-  axios.get('http://localhost:1337/api/users')
+  axios.get('http://localhost:1337/api/users') // make a module from enviromental file, on deploy change the environmental feed var, make a var in one place for now
        .then(res => dispatch(init(res.data)));
 };
 
