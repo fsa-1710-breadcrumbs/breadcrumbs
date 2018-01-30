@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { signup } from '../redux/auth';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  text1: {
+    fontSize: 20,
+    marginTop:  50,
+    color: 'purple'
+  }
+});
 
 class SignUp extends Component {
   constructor(props){
@@ -45,6 +59,9 @@ class SignUp extends Component {
     return (
       <View style={{ paddingVertical: 20 }}>
         <Card>
+          <Image
+            source={require('../../assets/breadcrumbs.png')}
+          />
           <FormLabel>Name</FormLabel>
           <FormInput
             placeholder="Name..."
@@ -79,7 +96,9 @@ class SignUp extends Component {
             onPress={() => this.props.navigation.navigate('SignIn')}
           />
         </Card>
-        <Text style={{ paddingLeft: 130, fontSize: 20 }}>{this.props.navigation.state.params && this.props.navigation.state.params.error}</Text>
+        <View style={styles.container}>
+          <Text style={styles.text1}>{this.props.navigation.state.params && this.props.navigation.state.params.error}</Text>
+        </View>
       </View>
     );
   }

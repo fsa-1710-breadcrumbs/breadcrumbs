@@ -16,7 +16,7 @@ export const SignedOut = StackNavigator({
   SignUp: {
     screen: SignUp,
     navigationOptions: {
-      title: 'Breadcrumbs',
+      title: 'Welcome',
       headerStyle
     }
   },
