@@ -7,6 +7,7 @@ import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
+import Geoloc from './screens/Geoloc';
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -51,8 +52,8 @@ export const SignedIn = TabNavigator(
       screen: Geoloc,
         navigationOptions: {
         tabBarLabel: 'Geoloc',
-        tabBarIcon: ({ tintcolor}) =>
-        <FontAwesome name="user" size={30} color={tintColor} />
+        // tabBarIcon: ({ tintcolor}) =>
+        // <FontAwesome name="user" size={30} color={tintColor} />
       }
     }
   },

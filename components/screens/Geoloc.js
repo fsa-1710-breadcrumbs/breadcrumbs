@@ -9,7 +9,7 @@ class GeolocationExample extends Component {
     this.state = {
       latitude: null,
       longitude: null,
-      error: "There is an error with your location",
+      error: null,
       trail: []
     };
   }
@@ -20,7 +20,6 @@ class GeolocationExample extends Component {
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          error: "There is an error with your location",
           trial: [...this.state.trail, {latitude: position.coords.latitude, longitude: position.coords.longitude}]
         });
       },
