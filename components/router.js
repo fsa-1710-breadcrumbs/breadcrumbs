@@ -7,7 +7,7 @@ import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
-import Geoloc from './screens/Geoloc';
+import CreateSphere from './screens/CreateSphere';
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -48,12 +48,12 @@ export const SignedIn = TabNavigator(
           <FontAwesome name="user" size={30} color={tintColor} />
       }
     },
-    Geo: {
-      screen: Geoloc,
+    CreateSphere: {
+      screen: CreateSphere,
         navigationOptions: {
-        tabBarLabel: 'Geoloc',
-        // tabBarIcon: ({ tintcolor}) =>
-        // <FontAwesome name="user" size={30} color={tintColor} />
+        tabBarLabel: 'CreateSphere'
+      //   tabBarIcon: ({ tintcolor}) =>
+      //   <FontAwesome name="user" size={30} color={tintColor} />
       }
     }
   },
@@ -66,7 +66,7 @@ export const SignedIn = TabNavigator(
   }
 );
 
-export const createRootNavigator = (signedIn = false) => {
+export const createRootNavigator = (signedIn = true) => {
   return StackNavigator(
     {
       SignedIn: {
