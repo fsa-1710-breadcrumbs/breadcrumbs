@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const User = require('../db/models/user');
+
 module.exports = router;
 
-router.post('/login', (req, res, next) => {
+router.put('/login', (req, res, next) => {
   const passwordAttempt = req.body.password;
   delete req.body.password;
   User.findOne({where: {email: req.body.email}})
@@ -34,9 +35,9 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
-router.post('/logout', (req, res) => {
+router.delete('/logout', (req, res, next) => {
   req.logout();
-  res.redirect('/');
+  res.sendStatus(204);
 });
 
 router.get('/me', (req, res) => {
