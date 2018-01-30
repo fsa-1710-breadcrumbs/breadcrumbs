@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+// import { CreateSphere } from './CreateSphere'
 
 class GeolocationExample extends Component {
   constructor(props) {
@@ -8,22 +9,29 @@ class GeolocationExample extends Component {
     this.state = {
       latitude: null,
       longitude: null,
-      error: null,
+      error: "There is an error with your location",
+      trail: []
     };
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
+    this.watchId = navigator.geolocation.watchPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          error: null,
+          error: "There is an error with your location",
+          trial: [...this.state.trail, {latitude: position.coords.latitude, longitude: position.coords.longitude}]
         });
       },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      //distance filter is set to 5 meters: user has to move 5 meters before a callback the callback is triggered
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 3 }
     );
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchId);
   }
 
   render() {

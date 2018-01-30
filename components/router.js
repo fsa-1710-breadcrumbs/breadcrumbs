@@ -46,6 +46,14 @@ export const SignedIn = TabNavigator(
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
       }
+    },
+    Geo: {
+      screen: Geoloc,
+        navigationOptions: {
+        tabBarLabel: 'Geoloc',
+        tabBarIcon: ({ tintcolor}) =>
+        <FontAwesome name="user" size={30} color={tintColor} />
+      }
     }
   },
   {
