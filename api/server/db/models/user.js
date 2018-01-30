@@ -4,11 +4,7 @@ const db = require('../db');
 
 const User = db.define('user', {
   name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   photoUrl: {
     type: Sequelize.STRING,
