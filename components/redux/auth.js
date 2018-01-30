@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { create as createUser } from './users';
+import IP from '../../IP';
 
 /* -----------------    ACTION TYPES    ------------------ */
 
@@ -31,20 +32,20 @@ export default function reducer (currentUser = {}, action) {
 /* ------------       THUNK CREATORS     ------------------ */
 
 export const login = (credentials, navigation) => dispatch => {
-  axios.put('http://localhost:1337/auth/login', credentials)
+  axios.put(`${IP}/auth/login`, credentials)
     .then(res => setUserAndRedirect(res.data, navigation, dispatch))
-    .catch(() => navigation.navigate('SignedOut', {error: 'Unsuccesful!'}));
+    .catch(() => navigation.navigate('SignedOut', {error: 'Unsuccessful!'}));
 };
 
 export const logout = navigation => dispatch => {
-  axios.delete('http://localhost:1337/auth/logout')
+  axios.delete(`${IP}/auth/logout`)
     .then(res => dispatch(removeCurrentUser(res.data)))
     .then(() => navigation.navigate('SignedOut', {error: 'Come back soon!'}))
     .catch(err => console.error('Logging out was unsuccesful', err));
 };
 
 export const signup = (credentials, navigation) => dispatch => {
-  axios.post('http://localhost:1337/auth/signup', credentials)
+  axios.post(`${IP}/auth/signup`, credentials)
     .then(res => {
       setUserAndRedirect(res.data, navigation, dispatch);
       dispatch(createUser(res.data));
@@ -53,7 +54,7 @@ export const signup = (credentials, navigation) => dispatch => {
 };
 
 export const fetchCurrentUser = () => dispatch => {
-  axios.get('http://localhost:1337/auth/me')
+  axios.get(`${IP}/auth/me`)
     .then(res => dispatch(setCurrentUser(res.data)))
     .catch(err => console.error('Fetching current user failed', err));
 };

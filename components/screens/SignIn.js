@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { login as loginFromReducer } from '../redux/auth';
@@ -35,7 +35,9 @@ class SignIn extends Component {
 
   render() {
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <KeyboardAvoidingView
+        behavior="position"
+        style={{ paddingVertical: 20 }}>
       <Card>
         <FormLabel>Email</FormLabel>
         <FormInput
@@ -58,7 +60,7 @@ class SignIn extends Component {
           onPress={() => this.handleSubmit(this.props.navigation)}
         />
       </Card>
-    </View>
+    </KeyboardAvoidingView>
     );
   }
 }
