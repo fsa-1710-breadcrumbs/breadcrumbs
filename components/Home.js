@@ -21,24 +21,24 @@ export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      // location: null
-        location: {
-           "coords": {
-             "accuracy": 65,
-             "altitude": 8.645169258117676,
-             "altitudeAccuracy": 12.72334098815918,
-             "heading": -1,
-             "latitude": 40.70467336127081,
-             "longitude": -74.00862513042138,
-             "speed": -1,
-           },
-           "timestamp": 1516994126569.8108,
-         }
+      location: null
+        // location: {
+        //    "coords": {
+        //      "accuracy": 65,
+        //      "altitude": 8.645169258117676,
+        //      "altitudeAccuracy": 12.72334098815918,
+        //      "heading": -1,
+        //      "latitude": 40.70467336127081,
+        //      "longitude": -74.00862513042138,
+        //      "speed": -1,
+        //    },
+        //    "timestamp": 1516994126569.8108,
+        //  }
     }
   }
 
-  // componentWillMount() {
-  //   this._getGeoLocation();
+  componentWillMount() {
+    this._getGeoLocation();
     // this.state.location = {
     //            "coords": {
     //              "accuracy": 65,
@@ -51,7 +51,7 @@ export default class Home extends React.Component {
     //            },
     //            "timestamp": 1516994126569.8108,
     //          }
-  // }
+  }
 
   render() {
     return (
@@ -65,14 +65,14 @@ export default class Home extends React.Component {
     );
   }
 
-// _getGeoLocation = async () => {
-//   let { status } = await Permissions.askAsync(Permissions.LOCATION);
-//   if (status === 'granted') {
-//     let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
-//     this.setState( { location } );
-//     console.log("this is my geo location: ", this.state.location)
-//   }
-// }
+_getGeoLocation = async () => {
+  let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  if (status === 'granted') {
+    let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
+    this.setState( { location } );
+    console.log("this is my geo location: ", this.state.location)
+  }
+}
 
 
 _onGLContextCreate = async (gl) => {
