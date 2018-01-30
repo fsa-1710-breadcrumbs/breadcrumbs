@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import Expo, {Location, Permissions, Platform} from 'expo';
 import { SphereGeometry } from 'three';
+import TimerMixin from 'react-timer-mixin';
 // import {maths, sphereX, sphereY, sphereZ } from './maths'
 console.disableYellowBox = true;
 
@@ -26,6 +27,13 @@ export default class Home extends React.Component {
      errorMessage: null,
      trails: []
     }
+
+    mixins: [TimerMixin],
+    componentDidMount: function() {
+      this.setInterval(() => {
+        console.log('I do not leak!');
+      }, 1500);
+    },
   }
 
   render() {
@@ -41,6 +49,15 @@ export default class Home extends React.Component {
     );
   }
 
+
+
+  createSphere = () => {
+    let geometry = new THREE.SphereGeometry(0.15, 20, 20);
+    let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
+    let sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+  }
+
 _onGLContextCreate = async (gl) => {
   //all scene stuff is via 3js
   const arSession = await this._glView.startARSessionAsync();
@@ -50,11 +67,15 @@ _onGLContextCreate = async (gl) => {
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
 
-let geometry = new THREE.SphereGeometry(0.15, 20, 20);
-let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
-let sphere = new THREE.Mesh(geometry, material);
-scene.add(sphere);
 
+
+
+// let geometry = new THREE.SphereGeometry(0.15, 20, 20);
+// let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
+// let sphere = new THREE.Mesh(geometry, material);
+// scene.add(sphere);
+
+  createSphere();
 
   const animate = () => {
     requestAnimationFrame(animate);
@@ -69,7 +90,6 @@ animate();
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
   }
 }
-
 
 
 
