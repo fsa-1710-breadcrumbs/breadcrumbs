@@ -3,10 +3,10 @@ const db = require('../db');
 
 const Trail = db.define('trail', {
   breadcrumbs: {
-    type: Sequelize.ARRAY(Sequelize.JSON)
+    type: Sequelize.ARRAY(Sequelize.JSONB)
   },
   description: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT
   }
 });
 
