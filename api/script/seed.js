@@ -15,6 +15,13 @@ const users = [
     password: 'panda',
     isAdmin: false,
     userId: 2
+  },
+  {
+    name: 'a a',
+    email: 'a@a.com',
+    password: 'a',
+    isAdmin: true,
+    userId: 3
   }
 ];
 

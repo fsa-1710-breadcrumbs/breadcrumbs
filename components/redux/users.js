@@ -1,4 +1,6 @@
 import axios from 'axios';
+import IP from '../../IP';
+
 
 /* -----------------    ACTION TYPES    ------------------ */
 
@@ -41,24 +43,24 @@ export default function reducer (users = [], action) {
 /* ------------       THUNK CREATORS     ------------------ */
 
 export const fetchUsers = () => dispatch => {
-  axios.get('http://localhost:1337/api/users')
+  axios.get(`${IP}/api/users`)
        .then(res => dispatch(init(res.data)));
 };
 
 export const removeUser = id => dispatch => {
-  axios.delete(`http://localhost:1337/api/users/${id}`)
+  axios.delete(`${IP}/api/users/${id}`)
        .then(() => dispatch(remove(id)))
        .catch(err => console.error(`Removing user: ${id} unsuccesful`, err));
 };
 
 export const addUser = user => dispatch => {
-  axios.post('http://localhost:1337/api/users', user)
+  axios.post(`${IP}/api/users`, user)
        .then(res => dispatch(create(res.data)))
        .catch(err => console.error(`Creating user: ${user} unsuccesful`, err));
 };
 
 export const updateUser = (id, user) => dispatch => {
-  axios.put(`http://localhost:1337/api/users/${id}`, user)
+  axios.put(`${IP}/api/users/${id}`, user)
        .then(res => dispatch(update(res.data)))
        .catch(err => console.error(`Updating user: ${user} unsuccesful`, err));
 };

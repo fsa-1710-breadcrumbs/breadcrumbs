@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { signup } from '../redux/auth';
@@ -57,7 +57,9 @@ class SignUp extends Component {
 
   render() {
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <KeyboardAvoidingView
+        behavior="position"
+        style={{ paddingVertical: 20 }}>
         <Card>
           <Image
             source={require('../../assets/breadcrumbs.png')}
@@ -99,7 +101,7 @@ class SignUp extends Component {
         <View style={styles.container}>
           <Text style={styles.text1}>{this.props.navigation.state.params && this.props.navigation.state.params.error}</Text>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
