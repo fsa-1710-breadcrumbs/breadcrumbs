@@ -28,9 +28,9 @@ export default class Home extends React.Component {
     // }
   // }
 
-  componentWillMount() {
-    this._getGeoLocation();
-  }
+  // componentWillMount() {
+  //   this._getGeoLocation();
+  // }
 
   render() {
     return (
@@ -44,18 +44,18 @@ export default class Home extends React.Component {
     );
   }
 
-_getGeoLocation = async () => {
-  let { status } = await Permissions.askAsync(Permissions.LOCATION);
-  if (status === 'granted') {
-    let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
+// _getGeoLocation = async () => {
+  // let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  // if (status === 'granted') {
+  //   let location = await Location.getCurrentPositionAsync( { enableHighAccuracy: true } );
     // Location.watchHeadingAsync(obj => console.log("this is obj: ", obj));
 
     // Location.watchPositionAsync({enableHighAccuracy: true}, obj => console.log("this is postionAsync obj: ", obj));
     // console.log("this is X: ", )
     // this.setState( { location } );
     // console.log("this is my geo location: ", this.state.location)
-  }
-}
+//   }
+// }
 
 
 _onGLContextCreate = async (gl) => {
@@ -68,48 +68,55 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
+  // const geometry = new THREE.SphereGeometry(50, 100, 100); // giant moon-sized sphere
   const geometry = new THREE.SphereGeometry(0.15, 20, 20);
   const material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
   const sphere = new THREE.Mesh(geometry, material);
 
-  // sphere.position.z = -1;
+  sphere.position.z = -1;
   // sphere.position.x = -10;
-  let { status } = await Permissions.askAsync(Permissions.LOCATION);
-  const location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+  // let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  // const location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
-  const stateLat = location.coords.latitude;
-  const stateLon = location.coords.longitude;
+  // const stateLat = location.coords.latitude;
+  // const stateLon = location.coords.longitude;
 
-  const hallLat = 40.70480335751015;
-  const hallLon = -74.00931626986272;
+  // const hallLat = 40.70480335751015;
+  // const hallLon = -74.00931626986272;
 
-  const diffLat = stateLat - hallLat;
-  const diffLon = stateLon - hallLon;
+  // const hallLat = 40.7028307
+  // const hallLon = -74.0186519
 
-  const xCoord = diffLat * 110900;
+  // const diffLat = stateLat - hallLat;
+  // const diffLon = stateLon - hallLon;
+
+  // const xCoord = diffLat * 110900;
   // const zCoord = diffLon * 110900;
-  const zCoord = diffLon * 11090;
 
 
-  const position = new THREE.Vector3(xCoord, 0, zCoord);
-  let headings = await Location.getHeadingAsync();
-  let trueHeading = headings.trueHeading;
-  console.log('???????', position);
-  position.applyAxisAngle(new THREE.Vector3(0, 1, 0),(trueHeading * 0.01745329))
-  console.log("after ????????", position);
-  console.log("this is xz: ", xCoord, zCoord)
+  // const position = new THREE.Vector3(xCoord, 0, zCoord);
+  // let headings = await Location.getHeadingAsync();
+  // let trueHeading = headings.trueHeading;
+  // console.log('???????', position);
+  // position.applyAxisAngle(new THREE.Vector3(0, 1, 0),(trueHeading * 0.01745329))
+  // position.applyAxisAngle(new THREE.Vector3(0, 1, 0), ((-Math.atan(xCoord / zCoord)) - (trueHeading * 0.01745329)))
+  // console.log("after ????????", position);
+  // console.log("this is xz: ", xCoord, zCoord)
 
   // sphere.translateX(xCoord);
   // sphere.translateZ(-zCoord);
-  sphere.translateX(position.x);
-  sphere.translateZ(position.z);
+  // sphere.translateX(position.x);
+  // sphere.translateZ(position.z);
 
   // let headings = await Location.getHeadingAsync();
   // let trueHeading = headings.trueHeading;
-  console.log("this is trueheading: ", trueHeading);
+  // console.log("this is trueheading: ", trueHeading);
   // sphere.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0),trueHeading * 0.01745329);
 
   scene.add(sphere);
+  // console.log('sphere x z', sphere.position.x, sphere.position.z)
+  camera.getWorldPosition();
+  setInterval(() => console.log("world position: ", camera.getWorldPosition()), 1000)
 
 
   // const newSphereGeometry = new THREE.SphereGeometry(0.15, 20, 20);
