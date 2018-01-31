@@ -28,14 +28,6 @@ export default class Home extends React.Component {
     }
   }
 
-    componentDidMount() {
-        setInterval(() => {
-        console.log('I do not leak!');
-        this.setState({number: this.state.number += 1});
-        console.log(this.state.number);
-      }, 5000);
-    }
-
   render() {
     console.log("WE ARE IN THE SPHERE!!!!!");
     return (
@@ -49,15 +41,7 @@ export default class Home extends React.Component {
     );
   }
 
-  // createSphere = () => {
-  //   let geometry = new THREE.SphereGeometry(0.15, 20, 20);
-  //   let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
-  //   let sphere = new THREE.Mesh(geometry, material);
-  //   scene.add(sphere);
-  // }
-
 _onGLContextCreate = async (gl) => {
-  //all scene stuff is via 3js
   const arSession = await this._glView.startARSessionAsync();
   const scene = new THREE.Scene();
   const camera = ExpoTHREE.createARCamera(arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
@@ -66,18 +50,18 @@ _onGLContextCreate = async (gl) => {
 
   let geometry = new THREE.SphereGeometry(0.15, 20, 20);
   let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
-  let sphere = new THREE.Mesh(geometry, material);
-  scene.add(sphere);
+  let xPos = 0;
 
-  createSphere();
-  console.log('THIS IS THE SCENE!!!!!!!!!!!!!', scene)
+  for(let i = 0; i < 10; i++){
+    let sphere = new THREE.Mesh(geometry, material);
+    sphere.position.z = xPos;
+    scene.add(sphere);
+    xPos -= .90;
+  }
 
   const animate = () => {
     requestAnimationFrame(animate);
-    sphere.rotation.x += 0.01;
-    sphere.rotation.y += 0.01;
     renderer.render(scene, camera);
-    //same from 2js excpet expo requires the end of the frame explicitly
     gl.endFrameEXP()
   }
 
@@ -86,8 +70,3 @@ _onGLContextCreate = async (gl) => {
   scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
   }
 }
-
-
-
-
-
