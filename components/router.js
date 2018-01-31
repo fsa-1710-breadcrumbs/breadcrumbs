@@ -7,6 +7,7 @@ import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
+import DropOrbs from './screens/DropOrbs';
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -46,6 +47,15 @@ export const SignedIn = TabNavigator(
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
       }
+    },
+    DropOrbs: {
+      screen: DropOrbs,
+      navigationOptions: {
+        tabBarLabel: 'DropOrbs'
+        // ,
+        // tabBarIcon: ({ tintColor }) =>
+        //   <FontAwesome name="user" size={30} color={tintColor} />
+      }
     }
   },
   {
@@ -57,7 +67,7 @@ export const SignedIn = TabNavigator(
   }
 );
 
-export const createRootNavigator = (signedIn = false) => {
+export const createRootNavigator = (signedIn = true) => {
   return StackNavigator(
     {
       SignedIn: {

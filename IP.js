@@ -1,5 +1,5 @@
 // For Fullstack Academy
-const IP = 'http://172.16.21.157:1337';
+const IP = 'http://172.16.22.221:1337';
 export default IP;
 
 // Click OPTION and click on the wireless icon ^ in the bar above to get your IP Address at home
