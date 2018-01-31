@@ -23,50 +23,46 @@ export default class Home extends React.Component {
     this.state = {
      location: null,
      errorMessage: null,
-     trails: [],
-     number: 0
+     trails: []
     }
   }
 
   render() {
-    console.log("WE ARE IN THE SPHERE!!!!!");
     return (
-      //full screen view via expo
-        <Expo.GLView
-        ref={(ref)=> this._glView = ref}
-        style={{ flex:1 }}
-        //onContextCreate takes a callback which recieves a gl object
-        onContextCreate={ this._onGLContextCreate }
-        />
+      <Expo.GLView
+      ref={(ref)=> this._glView = ref}
+      style={{ flex:1 }}
+      onContextCreate={ this._onGLContextCreate }
+      />
     );
   }
 
 _onGLContextCreate = async (gl) => {
-  const arSession = await this._glView.startARSessionAsync();
-  const scene = new THREE.Scene();
-  const camera = ExpoTHREE.createARCamera(arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
-  const renderer = ExpoTHREE.createRenderer({ gl });
-  renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+const arSession = await this._glView.startARSessionAsync();
+const scene = new THREE.Scene();
+const camera = ExpoTHREE.createARCamera(arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
+const renderer = ExpoTHREE.createRenderer({ gl });
+renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-  let geometry = new THREE.SphereGeometry(0.15, 20, 20);
-  let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
-  let xPos = 0;
+let geometry = new THREE.SphereGeometry(0.15, 20, 20);
+let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
+let zPos = 0;
 
-  for(let i = 0; i < 10; i++){
-    let sphere = new THREE.Mesh(geometry, material);
-    sphere.position.z = xPos;
-    scene.add(sphere);
-    xPos -= .90;
-  }
+for(let i = 0; i < 100; i++){
+  let sphere = new THREE.Mesh(geometry, material);
+  sphere.position.z = zPos;
+  scene.add(sphere);
+  zPos -= .90;
+}
 
-  const animate = () => {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-    gl.endFrameEXP()
-  }
+const animate = () => {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+  gl.endFrameEXP()
+}
 
-  animate();
+animate();
 
-  scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
-  }
+scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer)
+}
 }
