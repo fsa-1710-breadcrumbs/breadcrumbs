@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import Expo, {Location, Permissions, Platform} from 'expo';
@@ -23,22 +23,48 @@ export default class Home extends React.Component {
     this.state = {
       relativeLocation: []
     }
+    this.startIntervalFunc = this.startIntervalFunc.bind(this);
+    this.stopIntervalFunc = this.stopIntervalFunc.bind(this);
   }
 
   // componentWillMount() {
   //   this._getGeoLocation();
   // }
+  startIntervalFunc() {
+    // return start;
+
+  }
+  stopIntervalFunc() {
+    // return clearInterval(start);
+  }
 
   render() {
     console.log('this is the changing state: ', this.state.relativeLocation);
     return (
       //full screen view via expo
         <Expo.GLView
-        ref={(ref)=> this._glView = ref}
-        style={{ flex:1 }}
-        //onContextCreate takes a callback which recieves a gl object
-        onContextCreate={this._onGLContextCreate}
-        />
+          ref={(ref)=> this._glView = ref}
+          style={{ flex:1 }}
+          //onContextCreate takes a callback which recieves a gl object
+          onContextCreate={this._onGLContextCreate}
+        >
+          <Button
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor="transparent"
+            textStyle={{ color: '#bcbec1' }}
+            title="Start Interval"
+            // onPress={() => this.startIntervalFunc()}
+            onPress={() => console.log("this is startButton")}
+          />
+          <Button
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor="transparent"
+            textStyle={{ color: '#bcbec1' }}
+            title="Stop Interval"
+            // onPress={() => this.stopIntervalFunc()}
+            onPress={() => console.log("this is stopButton")}
+          />
+        </Expo.GLView>
     );
   }
 
@@ -114,6 +140,7 @@ _onGLContextCreate = async (gl) => {
   scene.add(sphere);
   // console.log('sphere x z', sphere.position.x, sphere.position.z)
   // setInterval(() => console.log("world position: ", camera.getWorldPosition()), 1000)
+
   setInterval(() => {
     let vectorPosition = camera.getWorldPosition()
     let newState = {
@@ -125,6 +152,8 @@ _onGLContextCreate = async (gl) => {
       relativeLocation: this.state.relativeLocation.concat(newState)
     });
   }, 2000);
+
+
 
   // const newSphereGeometry = new THREE.SphereGeometry(0.15, 20, 20);
   // const newSphereMaterial = new THREE.MeshBasicMaterial({ color: 0x7fffd4, wireframe: true });
