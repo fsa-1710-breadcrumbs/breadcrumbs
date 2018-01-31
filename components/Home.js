@@ -18,21 +18,19 @@ const styles = StyleSheet.create({
 });
 
 export default class Home extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-      // location: {
-      //   latitude: 40.70486772125275,
-      //   longitude: -74.00894022098937
-      // }
-    // }
-  // }
+  constructor() {
+    super();
+    this.state = {
+      relativeLocation: []
+    }
+  }
 
   // componentWillMount() {
   //   this._getGeoLocation();
   // }
 
   render() {
+    console.log('this is the changing state: ', this.state.relativeLocation);
     return (
       //full screen view via expo
         <Expo.GLView
@@ -115,9 +113,18 @@ _onGLContextCreate = async (gl) => {
 
   scene.add(sphere);
   // console.log('sphere x z', sphere.position.x, sphere.position.z)
-  camera.getWorldPosition();
-  setInterval(() => console.log("world position: ", camera.getWorldPosition()), 1000)
-
+  // setInterval(() => console.log("world position: ", camera.getWorldPosition()), 1000)
+  setInterval(() => {
+    let vectorPosition = camera.getWorldPosition()
+    let newState = {
+      x: vectorPosition.x,
+      y: vectorPosition.y,
+      z: vectorPosition.z,
+    };
+    this.setState({
+      relativeLocation: this.state.relativeLocation.concat(newState)
+    });
+  }, 2000);
 
   // const newSphereGeometry = new THREE.SphereGeometry(0.15, 20, 20);
   // const newSphereMaterial = new THREE.MeshBasicMaterial({ color: 0x7fffd4, wireframe: true });
