@@ -18,7 +18,13 @@ class Home extends Component {
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
           {this.props.trails.map(({ id, origin, photoUrl, userId, destination }) => (
-            <Card title={`TRAIL ${id}`} image={require('../../assets/defaultTrail.png')} key={id}>
+            <Card
+              title={`TRAIL ${id}`}
+              image={photoUrl[0] !== '.'
+                ? { uri: photoUrl}
+                : require('../../assets/defaultTrail.png')}
+              key={id}
+            >
               <Text style={{ marginBottom: 10 }}>
                 Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
               </Text>
@@ -31,7 +37,7 @@ class Home extends Component {
               <Button
                 backgroundColor="#03A9F4"
                 title="FOLLOW TRAIL"
-                onPress={() => console.log(this.props.users.filter(user => user.id === userId))}
+                onPress={() => console.log('SHOULD ADD NAVIGATION TO SingleTrail.js here!')}
               />
             </Card>
           ))}
