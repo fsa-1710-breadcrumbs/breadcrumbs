@@ -18,17 +18,21 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class SingleTrail extends React.Component {
-  constructor() {
-    super();
+class SingleTrail extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      currentTrail: this.props.trails.filter(trail => trail.id === this.props.navigation.state.params.id),
+      currentTrail: this.props.trails && this.props.trails.filter(trail => trail.id === 1)[0].breadcrumbs,
+      // currentTrail: this.props.trails.filter(trail => trail.id === this.props.navigation.state.params.id),
       errorMessage: null
     }
   }
 
   render() {
+    // console.log("this.props.trails",this.props.trails)
     let trailToDisplay = this.state.currentTrail
+    console.log("trailToDisplay.....",trailToDisplay)
+    // console.log("trailToDisplay 0....", trailToDisplay[0].breadcrumbs)
     return (
       <Expo.GLView
       ref={(ref)=> this._glView = ref}
@@ -39,15 +43,13 @@ export default class SingleTrail extends React.Component {
   }
 
   _onGLContextCreate = async (gl) => {
-    // if we hook up to store
-    // const { trails } = this.props.trails
     const arSession = await this._glView.startARSessionAsync();
     const scene = new THREE.Scene();
     const camera = ExpoTHREE.createARCamera(arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
     const renderer = ExpoTHREE.createRenderer({ gl });
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-    let geometry = new THREE.SphereGeometry(0.15, 20, 20);
+    let geometry = new THREE.SphereGeometry(0.05, 10, 10);
     let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
 
     for(let i = 0; i < trailToDisplay.length; i++){
@@ -56,7 +58,6 @@ export default class SingleTrail extends React.Component {
       sphere.position.y = trailToDisplay[i].y;
       sphere.position.z = trailToDisplay[i].z;
       scene.add(sphere);
-
     }
 
     const animate = () => {
@@ -79,4 +80,4 @@ const mapStateToProps = storeState => {
   };
 };
 
-export default connect(mapStateToProps)(SingleTrails)
+export default connect(mapStateToProps)(SingleTrail)

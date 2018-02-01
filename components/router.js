@@ -5,6 +5,7 @@ import { FontAwesome } from 'react-native-vector-icons';
 
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
+import SingleTrail from './screens/SingleTrail';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 
@@ -26,6 +27,13 @@ export const SignedOut = StackNavigator({
       title: 'Sign In',
       headerStyle
     }
+  },
+  SingleTrail: {
+    screen: SingleTrail,
+    navigationOptions: {
+      title: 'SingleTrail',
+      headerStyle
+    }
   }
 });
 
@@ -45,6 +53,15 @@ export const SignedIn = TabNavigator(
         tabBarLabel: 'Profile',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
+      }
+    },
+    SingleTrail: {
+      screen: SingleTrail,
+      navigationOptions: {
+        tabBarLabel: 'SingleTrail'
+        ,
+        // tabBarIcon: ({ tintColor }) =>
+        //   <FontAwesome name="user" size={30} color={tintColor} />
       }
     }
   },
