@@ -7,6 +7,7 @@ import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
+import Create from './startTrail';
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -45,6 +46,14 @@ export const SignedIn = TabNavigator(
         tabBarLabel: 'Profile',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
+      }
+    },
+    Create: {
+      screen: Create,
+      navigationOptions: {
+        tabBarLabel: 'Create',
+        tabBarIcon: ({ tintColor }) =>
+          <FontAwesome name="play" size={30} color={tintColor} />
       }
     }
   },
