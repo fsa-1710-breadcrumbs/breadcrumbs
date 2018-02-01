@@ -22,17 +22,12 @@ class SingleTrail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTrail: this.props.trails && this.props.trails.filter(trail => trail.id === 1)[0].breadcrumbs,
-      // currentTrail: this.props.trails.filter(trail => trail.id === this.props.navigation.state.params.id),
+      currentTrail: this.props.trails && this.props.trails.filter(trail => trail.id === this.props.navigation.state.params.id)[0].breadcrumbs,
       errorMessage: null
     }
   }
 
   render() {
-    // console.log("this.props.trails",this.props.trails)
-    let trailToDisplay = this.state.currentTrail
-    console.log("trailToDisplay.....",trailToDisplay)
-    // console.log("trailToDisplay 0....", trailToDisplay[0].breadcrumbs)
     return (
       <Expo.GLView
       ref={(ref)=> this._glView = ref}
@@ -43,13 +38,14 @@ class SingleTrail extends React.Component {
   }
 
   _onGLContextCreate = async (gl) => {
+    let trailToDisplay = this.state.currentTrail
     const arSession = await this._glView.startARSessionAsync();
     const scene = new THREE.Scene();
     const camera = ExpoTHREE.createARCamera(arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
     const renderer = ExpoTHREE.createRenderer({ gl });
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-    let geometry = new THREE.SphereGeometry(0.05, 10, 10);
+    let geometry = new THREE.SphereGeometry(0.1, 10, 10);
     let material = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
 
     for(let i = 0; i < trailToDisplay.length; i++){
@@ -81,3 +77,4 @@ const mapStateToProps = storeState => {
 };
 
 export default connect(mapStateToProps)(SingleTrail)
+

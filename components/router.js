@@ -54,15 +54,6 @@ export const SignedIn = TabNavigator(
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
       }
-    },
-    SingleTrail: {
-      screen: SingleTrail,
-      navigationOptions: {
-        tabBarLabel: 'SingleTrail'
-        ,
-        // tabBarIcon: ({ tintColor }) =>
-        //   <FontAwesome name="user" size={30} color={tintColor} />
-      }
     }
   },
   {
@@ -87,6 +78,14 @@ export const createRootNavigator = (signedIn = false) => {
         screen: SignedOut,
         navigationOptions: {
           gesturesEnabled: false
+        }
+      },
+      SingleTrail: {
+        screen: SingleTrail,
+        navigationOptions: {
+          tabBarLabel: 'SingleTrail',
+          tabBarIcon: ({ tintColor }) =>
+            <FontAwesome name="globe" size={30} color={tintColor} />
         }
       }
     },
