@@ -42,7 +42,7 @@ export const SignedIn = TabNavigator(
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarLabel: 'Home',
+        tabBarLabel: 'Trails',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="home" size={30} color={tintColor} />
       }
