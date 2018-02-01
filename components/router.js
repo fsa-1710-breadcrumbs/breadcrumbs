@@ -28,6 +28,8 @@ export const SignedOut = StackNavigator({
       headerStyle
     }
   }
+}, {
+  headerMode: 'none',
 });
 
 export const SignedIn = TabNavigator(
@@ -47,14 +49,6 @@ export const SignedIn = TabNavigator(
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
       }
-    },
-    Create: {
-      screen: Create,
-      navigationOptions: {
-        tabBarLabel: 'Create',
-        tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="globe" size={30} color={tintColor} />
-      }
     }
   },
   {
@@ -72,18 +66,26 @@ export const createRootNavigator = (signedIn = false) => {
       SignedIn: {
         screen: SignedIn,
         navigationOptions: {
-          gesturesEnabled: false
+          gesturesEnabled: false,
+          headerStyle,
         }
       },
       SignedOut: {
         screen: SignedOut,
         navigationOptions: {
-          gesturesEnabled: false
+          gesturesEnabled: false,
+          headerStyle,
         }
+      },
+      Create: {
+        screen: Create,
+        navigationOptions: {
+          gesturesEnabled: false,
+          headerBackTitle: 'Stop Trail'
+        },
       }
     },
     {
-      headerMode: 'none',
       mode: 'modal',
       initialRouteName: signedIn ? 'SignedIn' : 'SignedOut'
     }
