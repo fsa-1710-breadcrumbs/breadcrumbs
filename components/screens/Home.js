@@ -1,51 +1,53 @@
-// START APP HERE!!
+import React, { Component } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { Card, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-import React from "react";
-import { ScrollView, Text, Linking, View } from "react-native";
-import { Card, Button } from "react-native-elements";
-
-const images = [
-  {
-    key: 1,
-    name: "Nathan Anderson",
-    image: require("../../assets/defaultTrail.png"),
-    url: "https://unsplash.com/photos/C9t94JC4_L8"
-  },
-  {
-    key: 2,
-    name: "Jamison McAndie",
-    image: require("../../assets/defaultTrail.png"),
-    url: "https://unsplash.com/photos/waZEHLRP98s"
-  },
-  {
-    key: 3,
-    name: "Alberto Restifo",
-    image: require("../../assets/defaultTrail.png"),
-    url: "https://unsplash.com/photos/cFplR9ZGnAk"
-  },
-  {
-    key: 4,
-    name: "John Towner",
-    image: require("../../assets/defaultTrail.png"),
-    url: "https://unsplash.com/photos/89PFnHKg8HE"
+class Home extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    };
   }
-];
 
-export default () => (
-  <View style={{ flex: 1 }}>
-    <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-      {images.map(({ name, image, url, key }) => (
-        <Card title={`CARD ${key}`} image={image} key={key}>
-          <Text style={{ marginBottom: 10 }}>
-            Photo by {name}.
-          </Text>
-          <Button
-            backgroundColor="#03A9F4"
-            title="VIEW NOW"
-            onPress={() => Linking.openURL(url)}
-          />
-        </Card>
-      ))}
-    </ScrollView>
-  </View>
-);
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
+          {this.props.trails.map(({ id, origin, photoUrl, userId, destination }) => (
+            <Card title={`TRAIL ${id}`} image={require('../../assets/defaultTrail.png')} key={id}>
+              <Text style={{ marginBottom: 10 }}>
+                Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
+              </Text>
+              <Text style={{ marginBottom: 10 }}>
+                Origin: {origin}.
+              </Text>
+              <Text style={{ marginBottom: 10 }}>
+                Destination: {destination}.
+              </Text>
+              <Button
+                backgroundColor="#03A9F4"
+                title="FOLLOW TRAIL"
+                onPress={() => console.log(this.props.users.filter(user => user.id === userId))}
+              />
+            </Card>
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
+}
+
+const mapStateToProps = storeState => {
+  return {
+    users: storeState.users,
+    currentUser: storeState.currentUser,
+    trails: storeState.trails
+  };
+};
+const mapDispatchToProps = null;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
