@@ -56,11 +56,11 @@ export const removeUser = id => dispatch => {
 export const addUser = user => dispatch => {
   axios.post(`${IP}/api/users`, user)
        .then(res => dispatch(create(res.data)))
-       .catch(err => console.error(`Creating user: ${user} unsuccesful`, err));
+       .catch(err => console.error(`Creating user: ${user.id} unsuccesful`, err));
 };
 
 export const updateUser = (id, user) => dispatch => {
   axios.put(`${IP}/api/users/${id}`, user)
        .then(res => dispatch(update(res.data)))
-       .catch(err => console.error(`Updating user: ${user} unsuccesful`, err));
+       .catch(err => console.error(`Updating user: ${user.id} unsuccesful`, err));
 };

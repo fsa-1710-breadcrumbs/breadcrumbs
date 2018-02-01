@@ -8,25 +8,25 @@ const images = [
   {
     key: 1,
     name: "Nathan Anderson",
-    image: require("../../assets/defaultPanda.jpg"),
+    image: require("../../assets/defaultTrail.png"),
     url: "https://unsplash.com/photos/C9t94JC4_L8"
   },
   {
     key: 2,
     name: "Jamison McAndie",
-    image: require("../../assets/defaultPanda.jpg"),
+    image: require("../../assets/defaultTrail.png"),
     url: "https://unsplash.com/photos/waZEHLRP98s"
   },
   {
     key: 3,
     name: "Alberto Restifo",
-    image: require("../../assets/defaultPanda.jpg"),
+    image: require("../../assets/defaultTrail.png"),
     url: "https://unsplash.com/photos/cFplR9ZGnAk"
   },
   {
     key: 4,
     name: "John Towner",
-    image: require("../../assets/defaultPanda.jpg"),
+    image: require("../../assets/defaultTrail.png"),
     url: "https://unsplash.com/photos/89PFnHKg8HE"
   }
 ];

@@ -25,7 +25,7 @@ class Profile extends Component {
               marginBottom: 20
             }}
           >
-            <Text style={{ color: 'white', fontSize: 28 }}>Bye</Text>
+            <Text style={{ color: 'white', fontSize: 28 }}>{this.props.currentUser.name && this.props.currentUser.name.split(' ')[0]}</Text>
           </View>
           <Button
             backgroundColor="#03A9F4"
@@ -41,7 +41,8 @@ class Profile extends Component {
 const mapStateToProps = storeState => {
   return {
     users: storeState.users,
-    currentUser: storeState.currentUser
+    currentUser: storeState.currentUser,
+    trails: storeState.trails
   };
 };
 const mapDispatchToProps = (dispatch) => ({
