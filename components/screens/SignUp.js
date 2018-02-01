@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { signup } from '../redux/auth';
+import { signup, fetchCurrentUser } from '../redux/auth';
+import { fetchUsers } from '../redux/users';
+import { fetchTrails } from '../redux/trails';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,6 +32,10 @@ class SignUp extends Component {
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchInitialData();
   }
 
   handleChangeName(value) {
@@ -109,11 +115,17 @@ class SignUp extends Component {
 const mapStateToProps = storeState => {
   return {
     users: storeState.users,
-    currentUser: storeState.currentUser
+    currentUser: storeState.currentUser,
+    trails: storeState.trails
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  signup: (credentials, navigation) => dispatch(signup(credentials, navigation))
+  signup: (credentials, navigation) => dispatch(signup(credentials, navigation)),
+  fetchInitialData: () => {
+      dispatch(fetchUsers());
+      dispatch(fetchCurrentUser());
+      dispatch(fetchTrails());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

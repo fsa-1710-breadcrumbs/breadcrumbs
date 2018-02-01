@@ -68,7 +68,8 @@ class SignIn extends Component {
 const mapStateToProps = storeState => {
   return {
     users: storeState.users,
-    currentUser: storeState.currentUser
+    currentUser: storeState.currentUser,
+    trails: storeState.trails
   };
 };
 const mapDispatchToProps = (dispatch) => ({
