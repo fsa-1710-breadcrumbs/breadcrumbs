@@ -55,6 +55,7 @@ export default class Home extends React.Component {
             title="Start Interval"
             // onPress={() => this.startIntervalFunc()}
             onPress={() => console.log("this is startButton")}
+
           />
           <Button
             buttonStyle={{ marginTop: 20 }}
