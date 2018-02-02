@@ -14,12 +14,13 @@ class Home extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-          {this.props.trails.map(({ id, origin, photoUrl, userId, destination }) => (
+          {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
             <Card
-              title={`TRAIL ${id}`}
+              title={'TRAIL'}
               image={photoUrl[0] !== '.'
                 ? { uri: photoUrl}
                 : require('../../assets/defaultTrail.png')}
@@ -37,7 +38,7 @@ class Home extends Component {
               <Button
                 backgroundColor="#03A9F4"
                 title="FOLLOW TRAIL"
-                onPress={() => console.log('SHOULD ADD NAVIGATION TO SingleTrail.js here!')}
+                onPress={() => navigate('SingleTrail', { breadcrumbs })}
               />
             </Card>
           ))}
