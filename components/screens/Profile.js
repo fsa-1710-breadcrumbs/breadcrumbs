@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
@@ -46,6 +46,36 @@ class Profile extends Component {
             title="Start Trail"
             onPress={() => this.props.navigation.navigate('Create')}
           />
+
+            <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
+              {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
+                if (userId === this.props.currentUser.id) {
+                  return (
+                  <Card
+                    title={'TRAIL'}
+                    image={photoUrl[0] !== '.'
+                      ? { uri: photoUrl}
+                      : require('../../assets/defaultTrail.png')}
+                    key={id}
+                  >
+                    <Text style={{ marginBottom: 10 }}>
+                      Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
+                    </Text>
+                    <Text style={{ marginBottom: 10 }}>
+                      Origin: {origin}.
+                    </Text>
+                    <Text style={{ marginBottom: 10 }}>
+                      Destination: {destination}.
+                    </Text>
+                    <Button
+                      backgroundColor="#03A9F4"
+                      title="FOLLOW TRAIL"
+                      onPress={() => navigate('SingleTrail', { breadcrumbs })}
+                    />
+                  </Card>
+                  )}})}
+            </ScrollView>
+
         </Card>
       </View>
     );
