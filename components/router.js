@@ -38,15 +38,16 @@ export const SignedIn = TabNavigator(
     Home: {
       screen: Home,
       navigationOptions: {
+        headerLeft: null,
         tabBarLabel: 'Trails',
         tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="home" size={30} color={tintColor} />
+          <FontAwesome name="connectdevelop" size={30} color={tintColor} />
       }
     },
     Profile: {
       screen: Profile,
       navigationOptions: {
-        tabBarLabel: 'Profile',
+        tabBarLabel: 'Me',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
       }
