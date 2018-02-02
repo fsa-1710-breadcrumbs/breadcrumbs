@@ -14,7 +14,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log('were in the home')
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
