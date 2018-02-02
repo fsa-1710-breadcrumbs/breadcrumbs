@@ -12,20 +12,29 @@ class Profile extends Component {
   render() {
     return (
       <View style={{ paddingVertical: 20 }}>
-        <Card title="Leaving so soon?!">
+        <Card
+          title="Leaving so soon?!"
+          image={this.props.currentUser.photoUrl && this.props.currentUser.photoUrl[0] !== '.'
+            ? { uri: this.props.currentUser.photoUrl}
+            : require('../../assets/defaultPanda.jpg')}
+        >
           <View
             style={{
               backgroundColor: '#bcbec1',
               alignItems: 'center',
               justifyContent: 'center',
-              width: 80,
-              height: 80,
+              width: 100,
+              height: 100,
               borderRadius: 40,
               alignSelf: 'center',
               marginBottom: 20
             }}
           >
-            <Text style={{ color: 'white', fontSize: 28 }}>{this.props.currentUser.name && this.props.currentUser.name.split(' ')[0]}</Text>
+            <Text style={{ color: 'white', fontSize: 28 }}>
+            {this.props.currentUser.name && this.props.currentUser.name.indexOf(' ') !== -1
+              ? this.props.currentUser.name.split(' ')[0][0] + this.props.currentUser.name.split(' ')[1][0]
+              : 'Bye Bye'}
+            </Text>
           </View>
           <Button
             backgroundColor="#03A9F4"
