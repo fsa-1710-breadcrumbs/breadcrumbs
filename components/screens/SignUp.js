@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { signup, fetchCurrentUser } from '../redux/auth';
 import { fetchUsers } from '../redux/users';
 import { fetchTrails } from '../redux/trails';
+import breadcrumb from '../../assets/breadcrumbs.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,7 +69,7 @@ class SignUp extends Component {
         style={{ paddingVertical: 20 }}>
         <Card>
           <Image
-            source={require('../../assets/breadcrumbs.png')}
+            source={breadcrumb}
           />
           <FormLabel>Name</FormLabel>
           <FormInput
