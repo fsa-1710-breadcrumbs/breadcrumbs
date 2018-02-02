@@ -31,17 +31,17 @@ class SingleTrail extends React.Component {
     let trailToDisplay = this.props.navigation.state.params.breadcrumbs;
 
     //first object rendered from trailToDisplay
-    let geometry = new THREE.SphereGeometry(0.2, 20, 20);
+    let geometry = new THREE.SphereGeometry(0.1, 30, 30);
     let material = new THREE.MeshBasicMaterial({ color: 0x2F5CFF, wireframe: true });
     let sphere = new THREE.Mesh(geometry, material);
     //xyz for first orb
-    sphere.position.x = trailToDisplay[0].x
-    sphere.position.y = trailToDisplay[0].y
-    sphere.position.z = trailToDisplay[0].z
+    sphere.position.x = trailToDisplay[0].x;
+    sphere.position.y = trailToDisplay[0].y;
+    sphere.position.z = trailToDisplay[0].z;
     scene.add(sphere)
 
     // creates a sphere for each object in trailToDisplay array except first && last
-    let geometry2 = new THREE.SphereGeometry(0.1, 10, 10);
+    let geometry2 = new THREE.SphereGeometry(0.1, 30, 30);
     let material2 = new THREE.MeshBasicMaterial({ color: 0xee82ee, wireframe: true });
     //create xyz of each orb
     for(let i = 1; i <= trailToDisplay.length - 2; i++){
@@ -53,13 +53,13 @@ class SingleTrail extends React.Component {
       }
 
     //last object rendered from trailToDisplay
-    let geometry3 = new THREE.SphereGeometry(0.2, 20, 20);
+    let geometry3 = new THREE.SphereGeometry(0.1, 30, 30);
     let material3 = new THREE.MeshBasicMaterial({ color: 0x2F5CFF, wireframe: true });
     let sphere3 = new THREE.Mesh(geometry3, material3);
     //xyz for last orb
-    sphere3.position.x = trailToDisplay[trailToDisplay.length - 1].x
-    sphere3.position.y = trailToDisplay[trailToDisplay.length - 1].y
-    sphere3.position.z = trailToDisplay[trailToDisplay.length - 1].z
+    sphere3.position.x = trailToDisplay[trailToDisplay.length - 1].x;
+    sphere3.position.y = trailToDisplay[trailToDisplay.length - 1].y;
+    sphere3.position.z = trailToDisplay[trailToDisplay.length - 1].z;
     scene.add(sphere3)
 
     animate();
@@ -86,4 +86,4 @@ const mapStateToProps = storeState => {
 
 const mapDispatchToProps = null;
 
-export default connect(mapStateToProps, null)(SingleTrail);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTrail);

@@ -22,7 +22,7 @@ class Home extends Component {
             <Card
               title={`TRAIL ${id}`}
               image={photoUrl[0] !== '.'
-                ? { uri: photoUrl}
+                ? { uri: photoUrl }
                 : require('../../assets/defaultTrail.png')}
               key={id}
             >
