@@ -7,6 +7,7 @@ import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
+import Create from './screens/StartTrail';
 import SingleTrail from './screens/SingleTrail';
 
 const headerStyle = {
@@ -28,6 +29,8 @@ export const SignedOut = StackNavigator({
       headerStyle
     }
   }
+}, {
+  headerMode: 'none',
 });
 
 export const SignedIn = TabNavigator(
@@ -64,14 +67,23 @@ export const createRootNavigator = (signedIn = false) => {
       SignedIn: {
         screen: SignedIn,
         navigationOptions: {
-          gesturesEnabled: false
+          gesturesEnabled: false,
+          headerStyle,
         }
       },
       SignedOut: {
         screen: SignedOut,
         navigationOptions: {
-          gesturesEnabled: false
+          gesturesEnabled: false,
+          headerStyle,
         }
+      },
+      Create: {
+        screen: Create,
+        navigationOptions: {
+          gesturesEnabled: false,
+          headerBackTitle: 'Stop Trail'
+        },
       },
       SingleTrail: {
         screen: SingleTrail,
@@ -82,7 +94,6 @@ export const createRootNavigator = (signedIn = false) => {
       }
     },
     {
-      headerMode: 'none',
       mode: 'modal',
       initialRouteName: signedIn ? 'SignedIn' : 'SignedOut'
     }
