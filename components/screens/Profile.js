@@ -41,11 +41,6 @@ class Profile extends Component {
             title="SIGN OUT"
             onPress={() => this.props.logout(this.props.navigation)}
           />
-          <Button
-            backgroundColor="#03A9F4"
-            title="Start Trail"
-            onPress={() => this.props.navigation.navigate('Create')}
-          />
         </Card>
       </View>
     );
