@@ -17,6 +17,12 @@ class Home extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
+        <Button
+        style={{ marginTop: 20 }}
+          backgroundColor="#EF6F42"
+          title="Create Trail"
+          onPress={() => navigate('Create')}
+        />
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
           {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
             <Card
