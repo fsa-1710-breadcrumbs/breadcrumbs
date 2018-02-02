@@ -31,7 +31,7 @@ class Home extends Component {
               <Button
                 backgroundColor="#03A9F4"
                 title="FOLLOW TRAIL"
-                onPress={() => console.log(this.props.users.filter(user => user.id === userId))}
+                onPress={() => console.log('hello')}
               />
             </Card>
           ))}

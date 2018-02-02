@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import Expo, {Location, Permissions, Platform} from 'expo';
 import { SphereGeometry } from 'three';
-import { addTrail } from '../redux/trails';
+import { addTrail, create } from '../redux/trails';
 console.disableYellowBox = true;
 
 const styles = StyleSheet.create({
@@ -23,8 +23,11 @@ class Create extends React.Component {
   constructor() {
     super();
     this.state = {
-      relativeLocation: [],
-      stopInterval: null
+      breadcrumbs: [],
+      stopInterval: null,
+      origin: '',
+      destination: '',
+      userId: null
     }
     this.x = [];
     this._onGLContextCreate = this._onGLContextCreate.bind(this);
@@ -41,9 +44,31 @@ class Create extends React.Component {
     // })
   }
 
+
   componentWillUnmount(){
     clearInterval(this.state.stopInterval);
+    // console.log("this is breadcrumbs before state: ", this.state.breadcrumbs);
+    // console.log("this is breadcrumbs before x thing: ", this.x);
+
+    // this.setState({
+    //   breadcrumbs: this.x,
+    //   origin: 'ORIGIN DEFAULT',
+    //   destination: 'DESTINATION DEFAULT',
+    //   userId: 5
+    // });
+
+    // console.log("this is breadcrumbs after state: ", this.state.breadcrumbs);
+    // console.log("this is breadcrumbs after x thing: ", this.x);
+
+    this.props.createTrail({
+      breadcrumbs: this.x,
+      origin: 'DEFAULT',
+      destination: 'DEFAULT',
+      userId: this.props.currentUser.id
+    });
   }
+
+
 
   render() {
     console.log('we should only see this once');
@@ -94,9 +119,7 @@ _onGLContextCreate = async (gl) => {
       z: vectorPosition.z,
     };
    this.x.push(newState)
-   console.log('length of arr', this.x.length);
   }, 2000);
-
 
   const animate = () => {
     requestAnimationFrame(animate);
@@ -115,11 +138,13 @@ _onGLContextCreate = async (gl) => {
 
 const mapStateToProps = storeState => {
   return {
-    users: storeState.users
+    currentUser: storeState.currentUser
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  createTrail: (newTrail) => dispatch(addTrail(newTrail))
+  createTrail: (newTrail) => {
+    dispatch(addTrail(newTrail))
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);
