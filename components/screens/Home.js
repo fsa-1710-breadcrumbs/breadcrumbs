@@ -14,10 +14,12 @@ class Home extends Component {
   }
 
   render() {
+    console.log('were in the home')
+    const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-          {this.props.trails.map(({ id, origin, photoUrl, userId, destination }) => (
+          {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
             <Card title={`TRAIL ${id}`} image={require('../../assets/defaultTrail.png')} key={id}>
               <Text style={{ marginBottom: 10 }}>
                 Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
@@ -31,7 +33,9 @@ class Home extends Component {
               <Button
                 backgroundColor="#03A9F4"
                 title="FOLLOW TRAIL"
-                onPress={() => console.log(this.props.users.filter(user => user.id === userId))}
+                onPress={() => {
+                  navigate('SingleTrail', { breadcrumbs });
+                }}
               />
             </Card>
           ))}
@@ -48,6 +52,7 @@ const mapStateToProps = storeState => {
     trails: storeState.trails
   };
 };
+
 const mapDispatchToProps = null;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

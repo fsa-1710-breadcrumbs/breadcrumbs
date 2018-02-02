@@ -28,13 +28,6 @@ export const SignedOut = StackNavigator({
       headerStyle
     }
   },
-  SingleTrail: {
-    screen: SingleTrail,
-    navigationOptions: {
-      title: 'SingleTrail',
-      headerStyle
-    }
-  }
 });
 
 export const SignedIn = TabNavigator(
@@ -83,9 +76,8 @@ export const createRootNavigator = (signedIn = false) => {
       SingleTrail: {
         screen: SingleTrail,
         navigationOptions: {
-          tabBarLabel: 'SingleTrail',
-          tabBarIcon: ({ tintColor }) =>
-            <FontAwesome name="globe" size={30} color={tintColor} />
+          title: 'Follow Trail',
+          headerStyle
         }
       }
     },
