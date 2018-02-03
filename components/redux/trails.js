@@ -25,7 +25,7 @@ export default function reducer (trails = [], action) {
       return action.trails;
 
     case CREATE:
-      return [...trails, action.trail];
+      return [action.trail, ...trails];
 
     case REMOVE:
       return trails.filter(trail => trail.id !== action.id);

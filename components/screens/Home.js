@@ -1,28 +1,58 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { ScrollView, Text, KeyboardAvoidingView } from 'react-native';
+import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      password: ''
+      origin: '',
+      destination: ''
     };
+    this.handleChangeOrigin = this.handleChangeOrigin.bind(this);
+    this.handleChangeDestination = this.handleChangeDestination.bind(this);
+  }
+
+  handleChangeOrigin(value) {
+    this.setState({origin: value});
+  }
+
+  handleChangeDestination(value) {
+    this.setState({destination: value});
   }
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={{ flex: 1 }}>
-        <Button
-        style={{ marginTop: 20 }}
-          backgroundColor="#EF6F42"
-          title="Create Trail"
-          onPress={() => navigate('Create')}
-        />
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{ flex: 1 }}>
+        <Card
+          style={{ marginTop: 20, marginBottom: 10 }}
+        >
+          <FormLabel>Origin</FormLabel>
+          <FormInput
+            placeholder="Starting origin and FACING..."
+            onChangeText={(origin) => this.handleChangeOrigin(origin)}
+            value={this.state.origin}
+          />
+          <FormLabel>Destination</FormLabel>
+          <FormInput
+            placeholder="Destination..."
+            onChangeText={(destination) => this.handleChangeDestination(destination)}
+            value={this.state.destination}
+          />
+          <Button
+            style={{ marginTop: 10 }}
+            backgroundColor="#EF6F42"
+            title="CREATE Trail"
+            onPress={() => {
+              navigate('Create', { origin: this.state.origin, destination: this.state.destination });
+              this.setState({ origin: '', destination: ''});
+            }}
+          />
+        </Card>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
           {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
             <Card
@@ -42,14 +72,20 @@ class Home extends Component {
                 Destination: {destination}.
               </Text>
               <Button
+                style={{ marginBottom: 10 }}
                 backgroundColor="#03A9F4"
-                title="FOLLOW TRAIL"
+                title="FOLLOW Trail Destination To Origin"
+                onPress={() => navigate('SingleTrail', { breadcrumbs: breadcrumbs.reverse() })} // <- this doesn't work like we thought?  need to fix
+              />
+              <Button
+                backgroundColor="#03A9F4"
+                title="FOLLOW Trail Origin To Destination"
                 onPress={() => navigate('SingleTrail', { breadcrumbs })}
               />
             </Card>
           ))}
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
