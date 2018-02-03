@@ -12,8 +12,6 @@ class Create extends React.Component {
     this.state = {
       breadcrumbs: [],
       stopInterval: null,
-      origin: null,
-      destination: null,
       userId: null
     };
     this.relativeLocation = [];
@@ -24,14 +22,16 @@ class Create extends React.Component {
     clearInterval(this.state.stopInterval);
     this.props.createTrail({
       breadcrumbs: this.relativeLocation,
-      userId: this.props.currentUser.id
+      userId: this.props.currentUser.id,
+      origin: this.props.navigation.state.params.origin,
+      destination: this.props.navigation.state.params.destination
     });
   }
 
   render() {
     return (
       <Expo.GLView
-      ref={(ref)=> this._glView = ref}
+      ref={(ref) => this._glView = ref}
       style={{ flex: 1 }}
       onContextCreate={this._onGLContextCreate}
       />
