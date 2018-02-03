@@ -11,8 +11,9 @@ class Profile extends Component {
 
   render() {
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
         <Card
+          style={{ flex: 1 }}
           title="Leaving so soon?!"
           image={this.props.currentUser.photoUrl && this.props.currentUser.photoUrl[0] !== '.'
             ? { uri: this.props.currentUser.photoUrl}
@@ -41,14 +42,6 @@ class Profile extends Component {
             title="SIGN OUT"
             onPress={() => this.props.logout(this.props.navigation)}
           />
-<<<<<<< HEAD
-          <Button
-            backgroundColor="#03A9F4"
-            title="Start Trail"
-            onPress={() => this.props.navigation.navigate('Create')}
-          />
-
-            <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
               {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
                 if (userId === this.props.currentUser.id) {
                   return (
@@ -73,14 +66,11 @@ class Profile extends Component {
                       title="FOLLOW TRAIL"
                       onPress={() => navigate('SingleTrail', { breadcrumbs })}
                     />
+
                   </Card>
                   )}})}
-            </ScrollView>
-
-=======
->>>>>>> master
-        </Card>
-      </View>
+            </Card>
+        </ScrollView>
     );
   }
 }
