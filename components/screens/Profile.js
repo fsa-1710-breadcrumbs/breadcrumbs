@@ -41,6 +41,7 @@ class Profile extends Component {
             title="SIGN OUT"
             onPress={() => this.props.logout(this.props.navigation)}
           />
+<<<<<<< HEAD
           <Button
             backgroundColor="#03A9F4"
             title="Start Trail"
@@ -76,6 +77,8 @@ class Profile extends Component {
                   )}})}
             </ScrollView>
 
+=======
+>>>>>>> master
         </Card>
       </View>
     );

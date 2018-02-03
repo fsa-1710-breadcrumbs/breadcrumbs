@@ -1,23 +1,10 @@
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
-import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import Expo from 'expo';
-import { SphereGeometry } from 'three';
 import { addTrail } from '../redux/trails';
 console.disableYellowBox = true;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'ghostwhite'
-  }
-});
 
 class Create extends React.Component {
   constructor() {
@@ -25,10 +12,8 @@ class Create extends React.Component {
     this.state = {
       breadcrumbs: [],
       stopInterval: null,
-      origin: null,
-      destination: null,
       userId: null
-    }
+    };
     this.relativeLocation = [];
     this._onGLContextCreate = this._onGLContextCreate.bind(this);
   }
@@ -37,15 +22,17 @@ class Create extends React.Component {
     clearInterval(this.state.stopInterval);
     this.props.createTrail({
       breadcrumbs: this.relativeLocation,
-      userId: this.props.currentUser.id
+      userId: this.props.currentUser.id,
+      origin: this.props.navigation.state.params.origin,
+      destination: this.props.navigation.state.params.destination
     });
   }
 
   render() {
     return (
       <Expo.GLView
-      ref={(ref)=> this._glView = ref}
-      style={{ flex:1 }}
+      ref={(ref) => this._glView = ref}
+      style={{ flex: 1 }}
       onContextCreate={this._onGLContextCreate}
       />
     );
@@ -55,7 +42,7 @@ _onGLContextCreate = async (gl) => {
   const arSession = await this._glView.startARSessionAsync();
   const scene = new THREE.Scene();
   const camera = ExpoTHREE.createARCamera(
-    arSession, gl.drawingBufferWidth , gl.drawingBufferHeight, 0.01, 1000);
+    arSession, gl.drawingBufferWidth, gl.drawingBufferHeight, 0.01, 1000);
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
@@ -72,7 +59,7 @@ _onGLContextCreate = async (gl) => {
       y: vectorPosition.y,
       z: vectorPosition.z,
     };
-   this.relativeLocation.push(newState)
+   this.relativeLocation.push(newState);
   }, 2000);
 
   const animate = () => {
@@ -82,7 +69,8 @@ _onGLContextCreate = async (gl) => {
     sphere.rotation.x += 0.01;
     sphere.rotation.y += 0.01;
 
-  }
+  };
+
   animate();
 
   this.setState({
@@ -100,7 +88,7 @@ const mapStateToProps = storeState => {
 };
 const mapDispatchToProps = (dispatch) => ({
   createTrail: (newTrail) => {
-    dispatch(addTrail(newTrail))
+    dispatch(addTrail(newTrail));
   }
 });
 
