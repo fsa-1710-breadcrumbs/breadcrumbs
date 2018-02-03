@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
+import { removeTrail } from '../redux/trails';
 
 class Profile extends Component {
   constructor(props){
@@ -10,9 +11,11 @@ class Profile extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
         <Card
+          style={{ flex: 1 }}
           title="Leaving so soon?!"
           image={this.props.currentUser.photoUrl && this.props.currentUser.photoUrl[0] !== '.'
             ? { uri: this.props.currentUser.photoUrl}
@@ -41,8 +44,41 @@ class Profile extends Component {
             title="SIGN OUT"
             onPress={() => this.props.logout(this.props.navigation)}
           />
-        </Card>
-      </View>
+              {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
+                if (userId === this.props.currentUser.id) {
+                  return (
+                    <Card
+                      title={'TRAIL'}
+                      image={photoUrl[0] !== '.'
+                        ? { uri: photoUrl}
+                        : require('../../assets/defaultTrail.png')}
+                      key={id}
+                    >
+                      <Text style={{ marginBottom: 10 }}>
+                        Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
+                      </Text>
+                      <Text style={{ marginBottom: 10 }}>
+                        Origin: {origin}.
+                      </Text>
+                      <Text style={{ marginBottom: 10 }}>
+                        Destination: {destination}.
+                      </Text>
+                      <Button
+                        backgroundColor="#03A9F4"
+                        title="FOLLOW TRAIL"
+                        onPress={() => navigate('SingleTrail', { breadcrumbs })}
+                      />
+                      <Button
+                        backgroundColor="red"
+                        title="X"
+                        onPress={() => this.props.removeTrail(id)}
+                      />
+                    </Card>
+                  );
+                }
+              })}
+            </Card>
+        </ScrollView>
     );
   }
 }
@@ -55,7 +91,8 @@ const mapStateToProps = storeState => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  logout: (navigation) => dispatch(logout(navigation))
+  logout: (navigation) => dispatch(logout(navigation)),
+  removeTrail: (trailId) => dispatch(removeTrail(trailId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
