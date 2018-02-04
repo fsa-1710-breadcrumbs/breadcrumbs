@@ -21,18 +21,17 @@ const styles = StyleSheet.create({
   }
 });
 
-class AddDescription extends Component {
+class EditTrail extends Component {
   constructor(props){
     super(props);
     this.state = {
       origin: '',
       destination: '',
-      //May want to add the functionality of adding a photo
-      // photoUrl: ''
+      photoUrl: ''
     };
     this.handleChangeOrigin = this.handleChangeOrigin.bind(this);
     this.handleChangeDestination = this.handleChangeDestination.bind(this);
-    // this.handleChangePhotoUrl= this.handleChangePhotoUrl.bind(this);
+    this.handleChangePhotoUrl = this.handleChangePhotoUrl.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -48,18 +47,25 @@ class AddDescription extends Component {
     this.setState({destination: value});
   }
 
+  handleChangePhotoUrl(value) {
+    this.setState({photoUrl: value});
+  }
+
   handleSubmit(trailId) {
+    console.log('this is currently the origin and destination', this.state.origin, this.state.destination)
     const origin = this.state.origin;
-    const destination = this.state.email;
-    // const photoUrl = this.state.photoUrl;
+    const destination = this.state.destination;
+    const photoUrl = this.state.photoUrl;
     this.props.editTrail(trailId, {
       origin,
       destination,
-      //photoUrl
+      photoUrl
     });
   }
 
   render() {
+    console.log('THESE ARE PROPS IN THE Edit', this.props)
+    const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView
         behavior="position"
@@ -76,31 +82,26 @@ class AddDescription extends Component {
           />
           <FormLabel>Destination</FormLabel>
           <FormInput
-            autoCapitalize = "none"
             placeholder="Where are you trying to get to?"
             onChangeText={(destination) => this.handleChangeDestination(destination)}
             value={this.state.destination}
           />
-          {/* <FormLabel>PhotoUrl</FormLabel>
+          <FormLabel>PhotoUrl</FormLabel>
           <FormInput
-            autoCapitalize = "none"
             secureTextEntry placeholder="Add a photo URL"
             onChangeText={(photoUrl) => this.handleChangePhotoUrl(photoUrl)}
             value={this.state.photoUrl}
-          /> */}
+          />
           <Button
             buttonStyle={{ marginTop: 20 }}
             backgroundColor="#03A9F4"
-            title="Add Trail Information"
-            onPress={() => this.handleSubmit(this.props.navigation)}
+            title="Update Current Trail Information"
+            onPress={() => {
+              this.handleSubmit(this.props.navigation.state.params.trailId);
+              navigate('Profile');
+              }
+            }
           />
-          {/* <Button
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="transparent"
-            textStyle={{ color: '#bcbec1' }}
-            title="Sign In"
-            onPress={() => this.props.navigation.navigate('SignIn')}
-          /> */}
         </Card>
         <View style={styles.container}>
           <Text style={styles.text1}>{this.props.navigation.state.params && this.props.navigation.state.params.error}</Text>
@@ -118,7 +119,7 @@ const mapStateToProps = storeState => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  editTrail: (id, trail) => dispatch(updateTrail(id, trail)),
+  editTrail: (id, trailInfo) => dispatch(updateTrail(id, trailInfo)),
   fetchInitialData: () => {
       dispatch(fetchUsers());
       dispatch(fetchCurrentUser());
@@ -126,4 +127,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddDescription);
+export default connect(mapStateToProps, mapDispatchToProps)(EditTrail);

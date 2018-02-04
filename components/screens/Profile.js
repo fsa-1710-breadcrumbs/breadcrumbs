@@ -69,6 +69,11 @@ class Profile extends Component {
                         onPress={() => navigate('SingleTrail', { breadcrumbs })}
                       />
                       <Button
+                        backgroundColor='green'
+                        title = 'EDIT TRAIL'
+                        onPress={() => navigate('EditTrail', {trailId:id})}
+                      />
+                      <Button
                         backgroundColor="red"
                         title="X"
                         onPress={() => this.props.removeTrail(id)}
