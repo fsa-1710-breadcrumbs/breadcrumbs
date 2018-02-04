@@ -75,7 +75,8 @@ class Home extends Component {
                 style={{ marginBottom: 10 }}
                 backgroundColor="#03A9F4"
                 title="FOLLOW Trail Destination To Origin"
-                onPress={() => navigate('SingleTrail', { breadcrumbs: breadcrumbs.reverse() })} // <- this doesn't work like we thought?  need to fix
+                onPress={() => navigate('SingleTrail', { breadcrumbs: breadcrumbs.reverse() })}
+                 // <- this doesn't work like we thought?  need to fix
               />
               <Button
                 backgroundColor="#03A9F4"
