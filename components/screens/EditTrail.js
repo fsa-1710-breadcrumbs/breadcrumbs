@@ -52,7 +52,6 @@ class EditTrail extends Component {
   }
 
   handleSubmit(trailId) {
-    console.log('this is currently the origin and destination', this.state.origin, this.state.destination)
     const origin = this.state.origin;
     const destination = this.state.destination;
     const photoUrl = this.state.photoUrl;
@@ -64,7 +63,6 @@ class EditTrail extends Component {
   }
 
   render() {
-    console.log('THESE ARE PROPS IN THE Edit', this.props)
     const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView
