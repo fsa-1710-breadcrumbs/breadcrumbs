@@ -34,7 +34,7 @@ class SingleTrail extends React.Component {
     //xyz for first orb
     sphere.position.x = trailToDisplay[0].x;
     sphere.position.y = trailToDisplay[0].y;
-    sphere.position.z = trailToDisplay[0].z+0.3;
+    sphere.position.z = trailToDisplay[0].z+0.4;
     scene.add(sphere);
 
     // creates a sphere for each object in trailToDisplay array except first && last
