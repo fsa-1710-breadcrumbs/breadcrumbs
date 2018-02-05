@@ -8,6 +8,39 @@ import { removeTrail } from '../redux/trails';
 class Profile extends Component {
   constructor(props){
     super(props);
+    this.vectorConversions = this.vectorConversions.bind(this);
+    this.generateReverse = this.generateReverse.bind(this);
+  }
+
+  vectorConversions(input){
+    let vectors = [];
+    for (var i = 0; i < input.length - 1; i++){
+      let p1 = input[i];
+      let p2 = input[i + 1];
+      let vector = {
+        x: -1 * (p2.x - p1.x),
+        y: -1 * (p2.y - p1.y),
+        z: -1 * (p2.z - p1.z)
+      };
+      vectors.push(vector);
+    }
+    return vectors.reverse();
+  }
+
+  generateReverse(vectors) {
+    let current = {x: 0, y: 0, z: 0};
+    let result = [];
+    result.push(current);
+
+    for (let vector of vectors) {
+      current = {
+        x: current.x + vector.x,
+        y: current.y + vector.y,
+        z: current.z + vector.z
+      };
+      result.push(current);
+    }
+    return result;
   }
 
   render() {
@@ -83,28 +116,25 @@ class Profile extends Component {
                         Destination: {destination}.
                       </Text>
                       <Button
-                        backgroundColor="#03A9F4"
-                        title="FOLLOW Trail to Origin"
                         style={{ marginBottom: 10 }}
+                        backgroundColor="#03A9F4"
+                        title="FOLLOW Trail To Origin"
+                        onPress={() => navigate('SingleTrail', { breadcrumbs: this.generateReverse(this.vectorConversions(breadcrumbs))})}
+                      />
+                      <Button
+                        style={{ marginBottom: 10 }}
+                        backgroundColor="#03A9F4"
+                        title="FOLLOW Trail To Destination"
                         onPress={() => navigate('SingleTrail', { breadcrumbs })}
                       />
                       <Button
+                        style={{ marginBottom: 10 }}
                         backgroundColor="#03A9F4"
-                        title="FOLLOW Trail to Destination"
-                        style={{ marginBottom: 10 }}
-                        onPress={() => navigate('SingleTrail', { breadcrumbs })}
+                        title = "EDIT Trail"
+                        onPress={() => navigate('EditTrail', { trailId: id })}
                       />
                       <Button
-                        backgroundColor='#03A9F4'
-                        title = 'EDIT TRAIL'
-                        style={{ marginBottom: 10 }}
-                        onPress={() => navigate('EditTrail', {trailId:id})}
-                      />
-                      <Button
-                        backgroundColor="red"
-                        title="Delete Trail"
                         style={{
-                          padding:10,
                           shadowColor: '#000000',
                           shadowOffset: {
                           width: 1,
@@ -113,6 +143,8 @@ class Profile extends Component {
                         shadowRadius: 10,
                         shadowOpacity: 0.5
                         }}
+                        backgroundColor="#EF6F42"
+                        title="DELETE Trail"
                         onPress={() => {
                           AlertIOS.alert(
                             'Are you sure you want to delete this trail?',
