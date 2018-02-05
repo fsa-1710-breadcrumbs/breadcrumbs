@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, AlertIOS, TouchableOpacity } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
@@ -75,7 +75,17 @@ class Profile extends Component {
                       />
                       <Button
                         backgroundColor="red"
-                        title="X"
+                        title="Delete Trail"
+                        style={{
+                          padding:10,
+                          shadowColor: '#000000',
+                          shadowOffset: {
+                          width: 0,
+                          height: 3
+                        },
+                        shadowRadius: 10,
+                        shadowOpacity: 0.5
+                        }}
                         onPress={() => this.props.removeTrail(id)}
                       />
                     </Card>

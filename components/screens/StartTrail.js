@@ -50,6 +50,8 @@ _onGLContextCreate = async (gl) => {
   const material = new THREE.MeshBasicMaterial({ color: 0x2F5CFF, wireframe: true });
   const sphere = new THREE.Mesh(geometry, material);
   sphere.position.z = -1;
+  sphere.position.x = 0;
+  sphere.position.y = 0;
   scene.add(sphere);
 
   const start = setInterval(() => {
