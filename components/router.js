@@ -86,6 +86,7 @@ export const createRootNavigator = (signedIn = false) => {
       Create: {
         screen: Create,
         navigationOptions: {
+          title: 'Hit Back to End Trail',
           gesturesEnabled: false
         },
       },
