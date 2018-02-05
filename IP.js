@@ -5,6 +5,8 @@
 
 // const IP = 'http://192.168.1.15:1337';
 // const IP = 'http://10.0.1.3:1337';
+// For Fullstack Academy
+const IP = 'http://172.16.21.157:1337';
 
 // For Fullstack Academy
 const IP = 'http://172.16.21.157:1337';
