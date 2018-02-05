@@ -82,8 +82,6 @@ class Profile extends Component {
                         shadowOpacity: 0.5
                         }}
                         onPress={() => this.props.removeTrail(id)}
-
-
                       />
                     </Card>
                   );
