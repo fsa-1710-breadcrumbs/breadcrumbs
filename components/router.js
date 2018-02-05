@@ -71,27 +71,29 @@ export const createRootNavigator = (signedIn = false) => {
         screen: SignedIn,
         navigationOptions: {
           gesturesEnabled: false,
-          headerStyle,
+          headerLeft: null,
+          headerStyle
         }
       },
       SignedOut: {
         screen: SignedOut,
         navigationOptions: {
           gesturesEnabled: false,
-          headerStyle,
+          headerLeft: null,
+          headerStyle
         }
       },
       Create: {
         screen: Create,
         navigationOptions: {
-          gesturesEnabled: false,
-          headerBackTitle: 'Stop Trail'
+          gesturesEnabled: false
         },
       },
       SingleTrail: {
         screen: SingleTrail,
         navigationOptions: {
           title: 'Follow Trail',
+          gesturesEnabled: false,
           headerStyle
         }
       },

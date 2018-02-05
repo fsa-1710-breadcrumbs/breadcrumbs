@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native';
+import { ScrollView, Text, KeyboardAvoidingView, AlertIOS } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -48,8 +48,19 @@ class Home extends Component {
             backgroundColor="#EF6F42"
             title="CREATE Trail"
             onPress={() => {
-              navigate('Create', { origin: this.state.origin, destination: this.state.destination });
-              this.setState({ origin: '', destination: ''});
+              AlertIOS.alert(
+               'You may begin your journey when the camera starts',
+               'To end your trip, press the back button',
+               [
+                 {
+                   text: 'OK',
+                   onPress: () => {
+                     navigate('Create', { origin: this.state.origin, destination: this.state.destination });
+                     this.setState({ origin: '', destination: ''});
+                   }
+                 }
+               ]
+              )
             }}
           />
         </Card>
