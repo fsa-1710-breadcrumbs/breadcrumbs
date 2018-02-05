@@ -70,8 +70,20 @@ class Profile extends Component {
                       />
                       <Button
                         backgroundColor="red"
-                        title="X"
+                        title="Delete Trail"
+                        style={{
+                          padding:10,
+                          shadowColor: '#000000',
+                          shadowOffset: {
+                          width: 0,
+                          height: 3
+                        },
+                        shadowRadius: 10,
+                        shadowOpacity: 0.5
+                        }}
                         onPress={() => this.props.removeTrail(id)}
+
+
                       />
                     </Card>
                   );
