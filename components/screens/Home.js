@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, KeyboardAvoidingView, AlertIOS } from 'react-native';
+import { ScrollView, Text, KeyboardAvoidingView } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -12,6 +12,8 @@ class Home extends Component {
     };
     this.handleChangeOrigin = this.handleChangeOrigin.bind(this);
     this.handleChangeDestination = this.handleChangeDestination.bind(this);
+    this.vectorConversions = this.vectorConversions.bind(this);
+    this.generateReverse = this.generateReverse.bind(this);
   }
 
   handleChangeOrigin(value) {
@@ -20,6 +22,37 @@ class Home extends Component {
 
   handleChangeDestination(value) {
     this.setState({destination: value});
+  }
+
+  vectorConversions(input){
+    let vectors = [];
+    for (var i = 0; i < input.length - 1; i++){
+      let p1 = input[i];
+      let p2 = input[i + 1];
+      let vector = {
+        x: -1 * (p2.x - p1.x),
+        y: -1 * (p2.y - p1.y),
+        z: -1 * (p2.z - p1.z)
+      };
+      vectors.push(vector);
+    }
+    return vectors.reverse();
+  }
+
+  generateReverse(vectors) {
+    let current = {x: 0, y: 0, z: 0};
+    let result = [];
+    result.push(current);
+
+    for (let vector of vectors) {
+      current = {
+        x: current.x + vector.x,
+        y: current.y + vector.y,
+        z: current.z + vector.z
+      };
+      result.push(current);
+    }
+    return result;
   }
 
   render() {
@@ -48,19 +81,8 @@ class Home extends Component {
             backgroundColor="#EF6F42"
             title="CREATE Trail"
             onPress={() => {
-              AlertIOS.alert(
-               'You may begin your journey when the camera starts',
-               'To end your trip, press the back button',
-               [
-                 {
-                   text: 'OK',
-                   onPress: () => {
-                     navigate('Create', { origin: this.state.origin, destination: this.state.destination });
-                     this.setState({ origin: '', destination: ''});
-                   }
-                 }
-               ]
-              )
+              navigate('Create', { origin: this.state.origin, destination: this.state.destination });
+              this.setState({ origin: '', destination: ''});
             }}
           />
         </Card>
@@ -85,13 +107,12 @@ class Home extends Component {
               <Button
                 style={{ marginBottom: 10 }}
                 backgroundColor="#03A9F4"
-                title="FOLLOW Trail Destination To Origin"
-                onPress={() => navigate('SingleTrail', { breadcrumbs: breadcrumbs.reverse() })}
-                 // <- this doesn't work like we thought?  need to fix
+                title="FOLLOW Trail To Origin"
+                onPress={() => navigate('SingleTrail', { breadcrumbs: this.generateReverse(this.vectorConversions(breadcrumbs))})}
               />
               <Button
                 backgroundColor="#03A9F4"
-                title="FOLLOW Trail Origin To Destination"
+                title="FOLLOW Trail To Destination"
                 onPress={() => navigate('SingleTrail', { breadcrumbs })}
               />
             </Card>
