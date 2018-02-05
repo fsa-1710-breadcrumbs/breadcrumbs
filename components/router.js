@@ -9,6 +9,8 @@ import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Create from './screens/StartTrail';
 import SingleTrail from './screens/SingleTrail';
+import EditTrail from './screens/EditTrail';
+
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -90,6 +92,13 @@ export const createRootNavigator = (signedIn = false) => {
         screen: SingleTrail,
         navigationOptions: {
           title: 'Follow Trail',
+          headerStyle
+        }
+      },
+      EditTrail: {
+        screen: EditTrail,
+        navigationOptions: {
+          title: 'Edit Trail',
           headerStyle
         }
       }
