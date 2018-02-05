@@ -8,9 +8,6 @@
 // For Fullstack Academy
 const IP = 'http://172.16.21.157:1337';
 
-// For Fullstack Academy
-const IP = 'http://172.16.21.157:1337';
-
 // For Default Localhost:
 // const IP = 'http://127.0.0.1:1337';
 
