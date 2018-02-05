@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, AlertIOS, TouchableOpacity } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
