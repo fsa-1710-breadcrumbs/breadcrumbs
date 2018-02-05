@@ -53,6 +53,12 @@ class Home extends Component {
                'To end your trip, press the back button',
                [
                  {
+                   text: 'Cancel',
+                   onPress: () => {
+                     console.log('User pressed Cancel');
+                   }
+                 },
+                 {
                    text: 'OK',
                    onPress: () => {
                      navigate('Create', { origin: this.state.origin, destination: this.state.destination });

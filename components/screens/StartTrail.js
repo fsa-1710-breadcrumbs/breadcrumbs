@@ -46,19 +46,11 @@ _onGLContextCreate = async (gl) => {
   const renderer = ExpoTHREE.createRenderer({ gl });
   renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-  const geometry = new THREE.SphereGeometry(0.1, 30, 30);
-  const material = new THREE.MeshBasicMaterial({ color: 0x2F5CFF, wireframe: true });
-  const sphere = new THREE.Mesh(geometry, material);
-  sphere.position.z = -1;
-  sphere.position.x = 0;
-  sphere.position.y = 0;
-  scene.add(sphere);
-
   const start = setInterval(() => {
     let vectorPosition = camera.getWorldPosition();
     let newState = {
       x: vectorPosition.x,
-      y: vectorPosition.y,
+      y: 0,
       z: vectorPosition.z,
     };
    this.relativeLocation.push(newState);
@@ -68,9 +60,6 @@ _onGLContextCreate = async (gl) => {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     gl.endFrameEXP();
-    sphere.rotation.x += 0.01;
-    sphere.rotation.y += 0.01;
-
   };
 
   animate();

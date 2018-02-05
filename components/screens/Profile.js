@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, AlertIOS, TouchableOpacity } from 'react-native';
+import { View, ScrollView, AlertIOS } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
@@ -42,7 +42,26 @@ class Profile extends Component {
           <Button
             backgroundColor="#03A9F4"
             title="SIGN OUT"
-            onPress={() => this.props.logout(this.props.navigation)}
+            onPress={() => {
+              AlertIOS.alert(
+                'Are you sure you want to sign out?',
+                'Press Cancel to stay signed in',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      console.log('User pressed Cancel');
+                    }
+                  },
+                  {
+                    text: 'Yes',
+                    onPress: () => {
+                      this.props.logout(this.props.navigation);
+                    }
+                  }
+                ]
+              )
+            }}
           />
               {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
                 if (userId === this.props.currentUser.id) {
@@ -65,12 +84,20 @@ class Profile extends Component {
                       </Text>
                       <Button
                         backgroundColor="#03A9F4"
-                        title="FOLLOW TRAIL"
+                        title="FOLLOW Trail to Origin"
+                        style={{ marginBottom: 10 }}
                         onPress={() => navigate('SingleTrail', { breadcrumbs })}
                       />
                       <Button
-                        backgroundColor='green'
+                        backgroundColor="#03A9F4"
+                        title="FOLLOW Trail to Destination"
+                        style={{ marginBottom: 10 }}
+                        onPress={() => navigate('SingleTrail', { breadcrumbs })}
+                      />
+                      <Button
+                        backgroundColor='#03A9F4'
                         title = 'EDIT TRAIL'
+                        style={{ marginBottom: 10 }}
                         onPress={() => navigate('EditTrail', {trailId:id})}
                       />
                       <Button
@@ -80,13 +107,32 @@ class Profile extends Component {
                           padding:10,
                           shadowColor: '#000000',
                           shadowOffset: {
-                          width: 0,
+                          width: 1,
                           height: 3
                         },
                         shadowRadius: 10,
                         shadowOpacity: 0.5
                         }}
-                        onPress={() => this.props.removeTrail(id)}
+                        onPress={() => {
+                          AlertIOS.alert(
+                            'Are you sure you want to delete this trail?',
+                            'Press Cancel to keep this trail',
+                            [
+                              {
+                                text: 'Cancel',
+                                onPress: () => {
+                                  console.log('User pressed Cancel');
+                                }
+                              },
+                              {
+                                text: 'Yes',
+                                onPress: () => {
+                                  this.props.removeTrail(id);
+                                }
+                              }
+                            ]
+                          );
+                        }}
                       />
                     </Card>
                   );
