@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { fetchCurrentUser } from '../redux/auth';
 import { fetchUsers } from '../redux/users';
 import { fetchTrails, updateTrail } from '../redux/trails';
-import breadcrumb from '../../assets/breadcrumbs.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -69,18 +68,15 @@ class EditTrail extends Component {
         behavior="position"
         style={{ paddingVertical: 20 }}>
         <Card>
-          <Image
-            source={breadcrumb}
-          />
           <FormLabel>Origin</FormLabel>
           <FormInput
-            placeholder="Where are you starting at?"
+            placeholder="Starting origin and FACING..."
             onChangeText={(origin) => this.handleChangeOrigin(origin)}
             value={this.state.origin}
           />
           <FormLabel>Destination</FormLabel>
           <FormInput
-            placeholder="Where are you trying to get to?"
+            placeholder="Destination..."
             onChangeText={(destination) => this.handleChangeDestination(destination)}
             value={this.state.destination}
           />

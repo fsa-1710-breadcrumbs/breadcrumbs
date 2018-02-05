@@ -30,9 +30,9 @@ class Home extends Component {
       let p1 = input[i];
       let p2 = input[i + 1];
       let vector = {
-        x: (p2.x - p1.x),
-        y: (p2.y - p1.y),
-        z: (p2.z - p1.z)
+        x: -1 * (p2.x - p1.x),
+        y: -1 * (p2.y - p1.y),
+        z: -1 * (p2.z - p1.z)
       };
       vectors.push(vector);
     }
