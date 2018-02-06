@@ -104,7 +104,7 @@ class Home extends Component {
           />
         </Card>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-          {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
+          {this.props.trails && this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
             <Card
               title={'TRAIL'}
               image={photoUrl[0] !== '.'

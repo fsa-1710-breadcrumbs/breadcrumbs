@@ -1,6 +1,6 @@
 import axios from 'axios';
 import IP from '../../IP';
-
+import { removeCurrentUser } from './auth';
 
 /* -----------------    ACTION TYPES    ------------------ */
 
@@ -47,9 +47,10 @@ export const fetchUsers = () => dispatch => {
        .then(res => dispatch(init(res.data)));
 };
 
-export const removeUser = id => dispatch => {
+export const removeUser = (id, navigate) => dispatch => {
   axios.delete(`${IP}/api/users/${id}`)
-       .then(() => dispatch(remove(id)))
+       .then(() => navigate('SignedOut', {error: 'Deleted Account'}))
+       .then(() => dispatch(removeCurrentUser()))
        .catch(err => console.error(`Removing user: ${id} unsuccesful`, err));
 };
 

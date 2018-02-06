@@ -4,6 +4,7 @@ import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { removeTrail } from '../redux/trails';
+import { removeUser } from '../redux/users';
 
 class Profile extends Component {
   constructor(props){
@@ -73,6 +74,7 @@ class Profile extends Component {
             </Text>
           </View>
           <Button
+            style={{ marginBottom: 10 }}
             backgroundColor="#03A9F4"
             title="SIGN OUT"
             onPress={() => {
@@ -90,6 +92,39 @@ class Profile extends Component {
                     text: 'Yes',
                     onPress: () => {
                       this.props.logout(this.props.navigation);
+                    }
+                  }
+                ]
+              )
+            }}
+          />
+          <Button
+            style={{
+              shadowColor: '#000000',
+              shadowOffset: {
+              width: 1,
+              height: 3
+            },
+            shadowRadius: 10,
+            shadowOpacity: 0.5
+            }}
+            backgroundColor="#EF6F42"
+            title="DELETE Account"
+            onPress={() => {
+              AlertIOS.alert(
+                'Deleting your account will also delete all your trails',
+                'Press Cancel to stay signed in',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      console.log('User pressed Cancel');
+                    }
+                  },
+                  {
+                    text: 'Delete',
+                    onPress: () => {
+                      this.props.removeUser(this.props.currentUser.id, navigate);
                     }
                   }
                 ]
@@ -159,7 +194,7 @@ class Profile extends Component {
                               {
                                 text: 'Yes',
                                 onPress: () => {
-                                  this.props.removeTrail(id);
+                                  this.props.removeTrail(id, navigate);
                                 }
                               }
                             ]
@@ -185,7 +220,8 @@ const mapStateToProps = storeState => {
 };
 const mapDispatchToProps = (dispatch) => ({
   logout: (navigation) => dispatch(logout(navigation)),
-  removeTrail: (trailId) => dispatch(removeTrail(trailId))
+  removeTrail: (trailId) => dispatch(removeTrail(trailId)),
+  removeUser: (userId, navigate) => dispatch(removeUser(userId, navigate))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
