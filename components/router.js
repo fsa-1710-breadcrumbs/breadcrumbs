@@ -93,7 +93,7 @@ export const createRootNavigator = (signedIn = false) => {
       SingleTrail: {
         screen: SingleTrail,
         navigationOptions: {
-          title: 'Follow Trail',
+          title: 'Tap Back to End Trail',
           gesturesEnabled: false,
           headerStyle
         }
