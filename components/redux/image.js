@@ -30,7 +30,7 @@ export default function reducer (pictures = [], action) {
 
 export const addPictures = image => dispatch => {
   axios.post(`${IP}/api/picture`, image)
-       .then(res => dispatch(addImage(res.data)))
-       .catch(err => console.error(`Creating trail: ${trail.id} unsuccesful`, err));
+       .then(res => dispatch(addImage(image)))
+       .catch(err => console.error(`Error uploading image`, err));
 };
 

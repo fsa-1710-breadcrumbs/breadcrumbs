@@ -24,7 +24,8 @@ class Create extends React.Component {
       breadcrumbs: this.relativeLocation,
       userId: this.props.currentUser.id,
       origin: this.props.navigation.state.params.origin,
-      destination: this.props.navigation.state.params.destination
+      destination: this.props.navigation.state.params.destination,
+      image: this.props.navigation.state.params.image
     });
   }
 

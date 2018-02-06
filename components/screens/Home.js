@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { ScrollView, Text, KeyboardAvoidingView, AlertIOS } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
+import Camera from './Camera';
 
 class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
       origin: '',
-      destination: ''
+      destination: '',
+      image: ''
     };
     this.handleChangeOrigin = this.handleChangeOrigin.bind(this);
     this.handleChangeDestination = this.handleChangeDestination.bind(this);
@@ -77,6 +79,12 @@ class Home extends Component {
             value={this.state.destination}
           />
           <Button
+          style={{ marginBottom: 10 }}
+          backgroundColor="#03A9F4"
+          title="Take a Picture of Trail Start"
+          onPress={() => navigate('Camera')}
+        />
+          <Button
             style={{ marginTop: 10 }}
             backgroundColor="#EF6F42"
             title="CREATE Trail"
@@ -94,8 +102,8 @@ class Home extends Component {
                  {
                    text: 'OK',
                    onPress: () => {
-                     navigate('Create', { origin: this.state.origin, destination: this.state.destination });
-                     this.setState({ origin: '', destination: ''});
+                     navigate('Create', { origin: this.state.origin, destination: this.state.destination, image: this.props.navigation.state.params.image });
+                     this.setState({ origin: '', destination: '', image:''});
                    }
                  }
                ]
