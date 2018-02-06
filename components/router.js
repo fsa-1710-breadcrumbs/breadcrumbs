@@ -10,6 +10,7 @@ import Profile from './screens/Profile';
 import Create from './screens/StartTrail';
 import SingleTrail from './screens/SingleTrail';
 import EditTrail from './screens/EditTrail';
+import Camera from './screens/Camera';
 
 
 const headerStyle = {
@@ -52,6 +53,14 @@ export const SignedIn = TabNavigator(
         tabBarLabel: 'Me',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
+      }
+    },
+    Camera: {
+      screen: Camera,
+      navigationOptions: {
+        tabBarLabel: 'Camera',
+        tabBarIcon: ({ tintColor }) =>
+          <FontAwesome name="globe" size={30} color={tintColor} />
       }
     }
   },

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, AlertIOS } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
+// import {IconButton} from 'react-native-icon-button';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { removeTrail } from '../redux/trails';
