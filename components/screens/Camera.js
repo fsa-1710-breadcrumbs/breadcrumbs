@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
 import { connect } from 'react-redux';
+import { addPictures } from './image';
 
 export default class Camera extends React.Component {
   constructor(){
@@ -31,9 +32,9 @@ export default class Camera extends React.Component {
       base64: true,
       aspect: [4, 3],
     })
-      .then (returnedBase64 => console.log(returnedBase64));
-
-    console.log(result);
+    console.log("before axios call",result)
+    this.props.uploadImage(result.base64)
+    console.log("after axios call",result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -49,6 +50,10 @@ const mapStateToProps = storeState => {
   };
 };
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch) => ({
+  uploadImage: (image) =>{
+    dispatch(addImage(image))
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Camera);
