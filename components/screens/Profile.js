@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, AlertIOS, TouchableOpacity } from 'react-native';
 import { Card, Button, Text } from 'react-native-elements';
-import {IconButton} from 'react-native-icon-button';
+// import {IconButton} from 'react-native-icon-button';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { removeTrail } from '../redux/trails';
@@ -69,10 +69,9 @@ class Profile extends Component {
                         title="FOLLOW TRAIL"
                         onPress={() => navigate('SingleTrail', { breadcrumbs })}
                       />
-                      <IconButton
-                        // backgroundColor='green'
-                        // title = 'EDIT TRAIL'
-                        icon={require('edit')}
+                      <Button
+                        backgroundColor='green'
+                        title = 'EDIT TRAIL'
                         onPress={() => navigate('EditTrail', {trailId:id})}
                       />
                       <Button
