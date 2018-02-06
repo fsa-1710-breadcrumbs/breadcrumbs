@@ -25,7 +25,7 @@ class Create extends React.Component {
       userId: this.props.currentUser.id,
       origin: this.props.navigation.state.params.origin,
       destination: this.props.navigation.state.params.destination,
-      image: this.props.navigation.state.params.image
+      photoUrl: this.props.navigation.state.params.image
     });
   }
 

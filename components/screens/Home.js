@@ -78,6 +78,9 @@ class Home extends Component {
             onChangeText={(destination) => this.handleChangeDestination(destination)}
             value={this.state.destination}
           />
+          <Text>
+            {'\n'}
+          </Text>
           <Button
           style={{ marginBottom: 10 }}
           backgroundColor="#03A9F4"
@@ -103,11 +106,11 @@ class Home extends Component {
                    text: 'OK',
                    onPress: () => {
                      navigate('Create', { origin: this.state.origin, destination: this.state.destination, image: this.props.navigation.state.params.image });
-                     this.setState({ origin: '', destination: '', image:''});
+                     this.setState({ origin: '', destination: '', image: ''});
                    }
                  }
                ]
-              )
+              );
             }}
           />
         </Card>
