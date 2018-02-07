@@ -54,14 +54,6 @@ export const SignedIn = TabNavigator(
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="user" size={30} color={tintColor} />
       }
-    },
-    Camera: {
-      screen: Camera,
-      navigationOptions: {
-        tabBarLabel: 'Camera',
-        tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="globe" size={30} color={tintColor} />
-      }
     }
   },
   {
@@ -112,6 +104,14 @@ export const createRootNavigator = (signedIn = false) => {
         navigationOptions: {
           title: 'Edit Trail',
           headerStyle
+        }
+      },
+      Camera: {
+        screen: Camera,
+        navigationOptions: {
+          tabBarLabel: 'Camera',
+          tabBarIcon: ({ tintColor }) =>
+            <FontAwesome name="globe" size={30} color={tintColor} />
         }
       }
     },

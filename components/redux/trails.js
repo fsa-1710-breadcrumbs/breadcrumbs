@@ -54,8 +54,8 @@ export const removeTrail = id => dispatch => {
 };
 
 export const addTrail = trail => dispatch => {
+  console.log('___________IN THE THUNK CALLLLLL__________________', trail)
   axios.post(`${IP}/api/trails`, trail)
-        .then(()=>console.log(trail))
        .then(res => dispatch(create(res.data)))
        .catch(err => console.error(`Creating trail: ${trail.id} unsuccesful`, err));
 };

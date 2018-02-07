@@ -32,8 +32,7 @@ class Camera extends React.Component {
       base64: true,
       aspect: [4, 3],
     })
-    console.log("before axios call",result)
-    navigate('Home', { image: result.base64 })
+    navigate('Home', { photoUrl: result.base64, origin: this.props.navigation.state.params.origin, destination: this.props.navigation.state.params.destination })
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }

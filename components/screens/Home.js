@@ -10,7 +10,7 @@ class Home extends Component {
     this.state = {
       origin: '',
       destination: '',
-      image: ''
+      photoUrl: ''
     };
     this.handleChangeOrigin = this.handleChangeOrigin.bind(this);
     this.handleChangeDestination = this.handleChangeDestination.bind(this);
@@ -85,7 +85,7 @@ class Home extends Component {
           style={{ marginBottom: 10 }}
           backgroundColor="#03A9F4"
           title="Take a Picture of Trail Start"
-          onPress={() => navigate('Camera')}
+          onPress={() => navigate('Camera', {origin: this.state.origin, destination: this.state.destination})}
         />
           <Button
             style={{ marginTop: 10 }}
@@ -105,8 +105,8 @@ class Home extends Component {
                  {
                    text: 'OK',
                    onPress: () => {
-                     navigate('Create', { origin: this.state.origin, destination: this.state.destination, image: this.props.navigation.state.params.image });
-                     this.setState({ origin: '', destination: '', image: ''});
+                     navigate('Create', { origin: this.props.navigation.state.params.origin || this.state.origin, destination: this.props.navigation.state.params.destination || this.state.destination, photoUrl: this.props.navigation.state.params.photoUrl || this.state.photoUrl});
+                     this.setState({ origin: '', destination: '', photoUrl: ''});
                    }
                  }
                ]

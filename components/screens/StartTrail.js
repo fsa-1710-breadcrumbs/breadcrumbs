@@ -7,8 +7,8 @@ import { addTrail } from '../redux/trails';
 console.disableYellowBox = true;
 
 class Create extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       breadcrumbs: [],
       stopInterval: null,
@@ -25,11 +25,13 @@ class Create extends React.Component {
       userId: this.props.currentUser.id,
       origin: this.props.navigation.state.params.origin,
       destination: this.props.navigation.state.params.destination,
-      photoUrl: this.props.navigation.state.params.image
+      photoUrl: this.props.navigation.state.params.photoUrl
     });
   }
 
   render() {
+    console.log("INSIDE CREARTE AKA START TRAIL")
+    console.log("INSIDE PROPS", this.props);
     return (
       <Expo.GLView
       ref={(ref) => this._glView = ref}

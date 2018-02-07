@@ -2,7 +2,7 @@
 
 
 // For Fullstack Academy
-const IP = 'http://172.16.22.221:1337';
+const IP = 'http://172.16.22.137:1337';
 
 // const IP = 'http://172.16.22.228:1337';
 
