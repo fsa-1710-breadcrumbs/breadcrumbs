@@ -99,14 +99,14 @@ class Home extends Component {
                    }
                  }
                ]
-              )
+              );
             }}
           />
         </Card>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
           {this.props.trails && this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) =>
             {
-              const filteredUsers = this.props.users.filter(user => user.id === userId)[0]
+              const filteredUsers = this.props.users.filter(user => user.id === userId)[0];
               return (
                 <Card
                   title={'TRAIL'}
@@ -136,7 +136,7 @@ class Home extends Component {
                     onPress={() => navigate('SingleTrail', { breadcrumbs })}
                   />
                 </Card>
-              )
+              );
             }
           )}
         </ScrollView>
