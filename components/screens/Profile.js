@@ -15,7 +15,7 @@ class Profile extends Component {
 
   vectorConversions(input){
     let vectors = [];
-    for (var i = 0; i < input.length - 1; i++){
+    for (let i = 0; i < input.length - 1; i++){
       let p1 = input[i];
       let p2 = input[i + 1];
       let vector = {
