@@ -95,7 +95,7 @@ class Profile extends Component {
                     }
                   }
                 ]
-              )
+              );
             }}
           />
           <Button
@@ -128,7 +128,7 @@ class Profile extends Component {
                     }
                   }
                 ]
-              )
+              );
             }}
           />
               {this.props.trails && this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {

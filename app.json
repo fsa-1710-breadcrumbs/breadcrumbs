@@ -1,5 +1,19 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
+    "name": "breadcrumbs",
+    "description": "Breadcrumbs is an augmented reality React-Native iOS app inspired by Hansel and Gretel.  Users can create or follow a trail of AR breadcrumbs, rendered as 3D floating orbs through your phone's camera.  Being independent of a map-based API, our app utilizes your relative location to provide small scale accuracy where Google Maps would fail.  Or if you're feeing adventurous, follow another user's trail to explore the road best travelled.  Breadcrumbs is your beacon back home.  Fullstack Academy of Code (Cohort 1710) - Capstone Project Team I:  Kevin Ho, Shannen Ye, Jesse Moskowitz, Vanessa Jimenez (TEAM GITHUB:  https://github.com/fsa-1710-breadcrumbs)",
+    "slug": "breadcrumbs",
+    "privacy": "public",
+    "sdkVersion": "25.0.0",
+    "version": "1.0.0",
+    "primaryColor": "#EF6F42",
+    "icon": "./assets/breadcrumbs.png",
+    "loading": {
+      "icon": "./assets/breadcrumbs.png",
+      "hideExponentText": false
+    },
+    "ios": {
+      "supportsTablet": false
+    }
   }
 }
