@@ -131,7 +131,7 @@ class Profile extends Component {
               )
             }}
           />
-              {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
+              {this.props.trails && this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
                 if (userId === this.props.currentUser.id) {
                   return (
                     <Card
@@ -142,7 +142,7 @@ class Profile extends Component {
                       key={id}
                     >
                       <Text style={{ marginBottom: 10 }}>
-                        Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
+                      Trail by {this.props.currentUser.name}.
                       </Text>
                       <Text style={{ marginBottom: 10 }}>
                         Origin: {origin}.
@@ -195,6 +195,7 @@ class Profile extends Component {
                                 text: 'Yes',
                                 onPress: () => {
                                   this.props.removeTrail(id, navigate);
+
                                 }
                               }
                             ]
