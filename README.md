@@ -1,30 +1,35 @@
 # Welcome to _Breadcrumbs_
 
 Fullstack Academy of Code (Cohort 1710) - Capstone Project
+
 Team I:  Kevin Ho, Shannen Ye, Jesse Moskowitz, Vanessa Jimenez
+
 Our Instructors:  Corey Greenwald & Omri Bernstein
+
 Our Team Fellow:  Jannine Chan
 
 [Deployed Frontend on EXPO](https://expo.io/@hokevins/breadcrumbs)
+
 [Deployed Backend on Heroku](https://breadcrumbs.herokuapp.com/)
+
 [Project Github](https://github.com/fsa-1710-breadcrumbs)
 
 Breadcrumbs is an augmented reality React-Native iOS app inspired by Hansel and Gretel.  Users can create or follow a trail of AR breadcrumbs, rendered as 3D floating orbs through your phone's camera.  Being independent of a map-based API, our app utilizes your relative location to provide small scale accuracy where Google Maps would fail.  Or if you're feeing adventurous, follow another user's trail to explore the road best travelled.  Breadcrumbs is your beacon back home.
 
 ## Background
 
-* Breadcrumbs daringly uses experimental technologies like EXPO-Three, in conjunction with some libraries (EXPO-ARKit) which are only a few months old within the React-Native environment.
+* Breadcrumbs daringly uses experimental technologies like EXPO-Three.js, in conjunction with some libraries (EXPO-ARKit) which are only a few months old within the React-Native environment.
 
-* Rather than relying on geolocation, we made the choice to leverage EXPO-Three in order to gather relative location data for small scale exact accuracy (i.e. looking for your car in a parking garage, first-time student at Fullstack looking for the Oasis.)
+* Rather than relying on geolocation, we made the choice to leverage EXPO-Three.js in order to gather relative location data for small scale exact accuracy (i.e. looking for your car in a parking garage, first-time student at Fullstack looking for the Oasis.)
 
-* As our Capstone, we wanted to explore new libraries like ARKit, Three.js, Expo-Three, React-Native & Expo.io combined with all of the technologies we know and love on the stack like Express and Sequelize.
+* As our Capstone, we wanted to explore new libraries like ARKit, Three.js, Expo-Three.js, React-Native & Expo.io combined with all of the technologies we know and love on the stack like Express.js and Sequelize.js.
 
 ## Specs
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Currently, React Native does not support npm version 5.x+.
-I recommend using a Node/NPM version manager like 'n'.
+We recommend using a Node/NPM version manager like 'n'.
 Simply run `npm install -g n` to install 'n' globally.
 Running the following commands will tell you what versions you currently have:
 ```
@@ -34,7 +39,7 @@ npm -v
 You should see node version v7.7.4 and npm 4.1.2 if you run `sudo n 7.7`.
 If you ever want to switch back to the latest version (or you just want to update to the latest version) just run `sudo n latest`.
 
-In the development process, I also recommend using Expo's iOS & Android simulator for quick feedback and testing.
+In the development process, we also recommend using Expo's iOS & Android simulator for quick feedback and testing.
 
 You should only need to update the global installation of `create-react-native-app` very rarely, ideally never.
 
@@ -58,8 +63,16 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## iPhone 6S Screenshots
 
-![iPhone 6S Screenshot DEMO 1](assets/breadcrumbsScreenshot01.jpg)
+![iPhone 6S Screenshot DEMO 1](assets/breadcrumbsScreenshot01.png)
+
+
 ![iPhone 6S Screenshot DEMO 2](assets/breadcrumbsScreenshot02.png)
+
+
 ![iPhone 6S Screenshot DEMO 3](assets/breadcrumbsScreenshot03.png)
+
+
 ![iPhone 6S Screenshot DEMO 4](assets/breadcrumbsScreenshot04.png)
+
+
 ![iPhone 6S Screenshot DEMO 5](assets/breadcrumbsScreenshot05.png)
