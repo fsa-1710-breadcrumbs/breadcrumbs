@@ -1,7 +1,6 @@
 import axios from 'axios';
 import IP from '../../IP';
 
-
 /* -----------------    ACTION TYPES    ------------------ */
 
 const INITIALIZE = 'INITIALIZE_USERS';
@@ -47,10 +46,11 @@ export const fetchUsers = () => dispatch => {
        .then(res => dispatch(init(res.data)));
 };
 
-export const removeUser = id => dispatch => {
+export const removeUser = (id, navigate) => dispatch => {
   axios.delete(`${IP}/api/users/${id}`)
-       .then(() => dispatch(remove(id)))
-       .catch(err => console.error(`Removing user: ${id} unsuccesful`, err));
+    .then(() => dispatch(remove(id)))
+    .then(() => navigate('SignedOut', {error: 'Deleted Account'}))
+    .catch(err => console.error(`Removing user: ${id} unsuccesful`, err));
 };
 
 export const addUser = user => dispatch => {

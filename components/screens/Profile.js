@@ -4,6 +4,7 @@ import { Card, Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { removeTrail } from '../redux/trails';
+import { removeUser } from '../redux/users';
 
 class Profile extends Component {
   constructor(props){
@@ -14,7 +15,7 @@ class Profile extends Component {
 
   vectorConversions(input){
     let vectors = [];
-    for (var i = 0; i < input.length - 1; i++){
+    for (let i = 0; i < input.length - 1; i++){
       let p1 = input[i];
       let p2 = input[i + 1];
       let vector = {
@@ -73,6 +74,7 @@ class Profile extends Component {
             </Text>
           </View>
           <Button
+            style={{ marginBottom: 10 }}
             backgroundColor="#03A9F4"
             title="SIGN OUT"
             onPress={() => {
@@ -96,7 +98,40 @@ class Profile extends Component {
               )
             }}
           />
-              {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
+          <Button
+            style={{
+              shadowColor: '#000000',
+              shadowOffset: {
+              width: 1,
+              height: 3
+            },
+            shadowRadius: 10,
+            shadowOpacity: 0.5
+            }}
+            backgroundColor="#EF6F42"
+            title="DELETE Account"
+            onPress={() => {
+              AlertIOS.alert(
+                'Deleting your account will also delete all your trails',
+                'Press Cancel to stay signed in',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      console.log('User pressed Cancel');
+                    }
+                  },
+                  {
+                    text: 'Delete',
+                    onPress: () => {
+                      this.props.removeUser(this.props.currentUser.id, navigate);
+                    }
+                  }
+                ]
+              )
+            }}
+          />
+              {this.props.trails && this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => {
                 if (userId === this.props.currentUser.id) {
                   return (
                     <Card
@@ -107,7 +142,7 @@ class Profile extends Component {
                       key={id}
                     >
                       <Text style={{ marginBottom: 10 }}>
-                        Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
+                      Trail by {this.props.currentUser.name}.
                       </Text>
                       <Text style={{ marginBottom: 10 }}>
                         Origin: {origin}.
@@ -159,7 +194,8 @@ class Profile extends Component {
                               {
                                 text: 'Yes',
                                 onPress: () => {
-                                  this.props.removeTrail(id);
+                                  this.props.removeTrail(id, navigate);
+
                                 }
                               }
                             ]
@@ -185,7 +221,8 @@ const mapStateToProps = storeState => {
 };
 const mapDispatchToProps = (dispatch) => ({
   logout: (navigation) => dispatch(logout(navigation)),
-  removeTrail: (trailId) => dispatch(removeTrail(trailId))
+  removeTrail: (trailId) => dispatch(removeTrail(trailId)),
+  removeUser: (userId, navigate) => dispatch(removeUser(userId, navigate))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

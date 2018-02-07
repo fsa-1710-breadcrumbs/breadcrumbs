@@ -11,7 +11,7 @@ const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 /* ------------     ACTION CREATORS      ------------------ */
 
 const setCurrentUser = user => ({ type: SET_CURRENT_USER, user });
-const removeCurrentUser = () => ({ type: REMOVE_CURRENT_USER });
+export const removeCurrentUser = () => ({ type: REMOVE_CURRENT_USER });
 
 /* ------------          REDUCER         ------------------ */
 

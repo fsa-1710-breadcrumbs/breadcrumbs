@@ -26,7 +26,7 @@ class Home extends Component {
 
   vectorConversions(input){
     let vectors = [];
-    for (var i = 0; i < input.length - 1; i++){
+    for (let i = 0; i < input.length - 1; i++){
       let p1 = input[i];
       let p2 = input[i + 1];
       let vector = {
@@ -104,36 +104,41 @@ class Home extends Component {
           />
         </Card>
         <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-          {this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) => (
-            <Card
-              title={'TRAIL'}
-              image={photoUrl[0] !== '.'
-                ? { uri: photoUrl}
-                : require('../../assets/defaultTrail.png')}
-              key={id}
-            >
-              <Text style={{ marginBottom: 10 }}>
-                Trail by {this.props.users && this.props.users.filter(user => user.id === userId)[0].name}.
-              </Text>
-              <Text style={{ marginBottom: 10 }}>
-                Origin: {origin}.
-              </Text>
-              <Text style={{ marginBottom: 10 }}>
-                Destination: {destination}.
-              </Text>
-              <Button
-                style={{ marginBottom: 10 }}
-                backgroundColor="#03A9F4"
-                title="FOLLOW Trail To Origin"
-                onPress={() => navigate('SingleTrail', { breadcrumbs: this.generateReverse(this.vectorConversions(breadcrumbs))})}
-              />
-              <Button
-                backgroundColor="#03A9F4"
-                title="FOLLOW Trail To Destination"
-                onPress={() => navigate('SingleTrail', { breadcrumbs })}
-              />
-            </Card>
-          ))}
+          {this.props.trails && this.props.trails.map(({ id, origin, photoUrl, userId, destination, breadcrumbs }) =>
+            {
+              const filteredUsers = this.props.users.filter(user => user.id === userId)[0]
+              return (
+                <Card
+                  title={'TRAIL'}
+                  image={photoUrl[0] !== '.'
+                    ? { uri: photoUrl}
+                    : require('../../assets/defaultTrail.png')}
+                  key={id}
+                >
+                  <Text style={{ marginBottom: 10 }}>
+                    Trail by {filteredUsers && filteredUsers.name}.
+                  </Text>
+                  <Text style={{ marginBottom: 10 }}>
+                    Origin: {origin}.
+                  </Text>
+                  <Text style={{ marginBottom: 10 }}>
+                    Destination: {destination}.
+                  </Text>
+                  <Button
+                    style={{ marginBottom: 10 }}
+                    backgroundColor="#03A9F4"
+                    title="FOLLOW Trail To Origin"
+                    onPress={() => navigate('SingleTrail', { breadcrumbs: this.generateReverse(this.vectorConversions(breadcrumbs))})}
+                  />
+                  <Button
+                    backgroundColor="#03A9F4"
+                    title="FOLLOW Trail To Destination"
+                    onPress={() => navigate('SingleTrail', { breadcrumbs })}
+                  />
+                </Card>
+              )
+            }
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
     );
