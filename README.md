@@ -6,7 +6,7 @@
 
 [Project Github (Frontend & Backend Repositories)](https://github.com/fsa-1710-breadcrumbs)
 
-[YouTube LIVE Demo] (https://www.youtube.com/watch?v=N-uAW3FQRbA)
+[YouTube LIVE Demo](https://www.youtube.com/watch?v=N-uAW3FQRbA)
 
 Breadcrumbs is an augmented reality React-Native iOS app inspired by Hansel and Gretel.  Users can create or follow a trail of AR breadcrumbs, rendered as 3D floating orbs through your phone's camera.  Being independent of a map-based API, our app utilizes your relative location to provide small scale accuracy where Google Maps would fail.  Or if you're feeing adventurous, follow another user's trail to explore the road best travelled.  Breadcrumbs is your beacon back home.
 
